@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Working Time Tracker UI</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/dark.css" />
+    <link rel="stylesheet" href="/css/light.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dark">
     <div class="container">
-        <div class="diagrams">
-            <canvas id="diagram"></canvas>
+      <div class="header">
+        <div class="ext-info"></div>
+        <div class="options">
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
         </div>
-        <div class="menu">
-            <div>Line</div>
-            <div>b</div>
-            <div>c</div>
-            <div>d</div>
-            <div>e</div>
+      </div>
+      <div class="users">
+        <div class="userSearchArea"></div>
+        <div class="usersArea">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
         </div>
-        <div class="info">
-            <div>a</div>
-            <div>b</div>
-        </div>
-        <div class="footter">
-            Created by <a href="https://github.com/JPiotr">@JPiotr</a>
-        </div>
-        <div class="users">
-        </div>
+      </div>
+      <div class="diagrams"></div>
+      <div class="summary"></div>
+      <div class="contributors"></div>
+      <div class="feet">
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>C</div>
+      </div>
     </div>
     <script type="text/javascript" src="core.js"></script>
-</body>
+  </body>
 </html>

@@ -1,156 +1,134 @@
-:root {
-  --color-1: #333745;
-  --color-2: #1d2029;
-  --color-a: #9a031e;
-  --color-b: #8a8a8a;
+@import url("/css/dark.css");
+@import url("/css/light.css");
+/* @import url("/css/dark-hc.css"); */
+/* @import url("/css/light-hc.css"); */
+/* @import url("/css/dark-mc.css"); */
+/* @import url("/css/light-mc.css"); */
+
+div{
+  outline: solid turquoise;
 }
 
-body {
+body.dark{
+  color: white;
   margin: 0;
   padding: 0;
-  background-color: #8a8a8a;
-  color: white;
+  background-color: var(--md-sys-color-background);
 }
-
 .container {
-  display: grid;
   width: 100dvw;
   height: 100dvh;
-  grid-template-columns: 0.25fr 0.25fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.4fr;
-  gap: 1em 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 2em 2em;
   grid-auto-flow: row;
   grid-template-areas:
-    "menu menu menu menu menu info"
-    "users users . diagrams diagrams diagrams"
-    "users users . diagrams diagrams diagrams"
-    "users users . diagrams diagrams diagrams"
-    "users users . diagrams diagrams diagrams"
-    "users users . diagrams diagrams diagrams"
-    "users users . diagrams diagrams diagrams"
-    "users users footter footter footter footter";
+    "header header header header header"
+    "users diagrams diagrams diagrams summary"
+    "users diagrams diagrams diagrams summary"
+    "users diagrams diagrams diagrams feet"
+    "users diagrams diagrams diagrams feet"
+    "users diagrams diagrams diagrams feet"
+    "users diagrams diagrams diagrams feet"
+    "users contributors contributors contributors feet";
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 1em;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "ext-info options options options options";
+  grid-area: header;
+}
+
+.ext-info {
+  grid-area: ext-info;
+}
+
+.options {
+  padding: 1em;
+  display: grid;
+  grid-auto-columns: 1fr;
+  gap: 0px 1.5em;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-content: stretch;
+  /* justify-items: center; */
+  /* align-items: center; */
+  justify-self: stretch;
+  align-self: stretch;
+  grid-area: options;
+}
+.options>div{
+  outline: solid salmon;
+}
+
+.users {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3em 1fr;
+  gap: 1em 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "userSearchArea"
+    "usersArea";
+  grid-area: users;
+}
+
+.userSearchArea {
+  grid-area: userSearchArea;
+}
+
+.usersArea {
+  padding: 0.5em 1em;
+  display: grid;
+  grid-auto-rows: 3em;
+  gap: 1em 0px;
+  grid-auto-flow: row;
+  justify-content: stretch;
+  align-content: start;
+  /* justify-items: center; */
+  align-items: stretch;
+  grid-area: usersArea;
+}
+.usersArea>div{
+  outline: solid magenta;
 }
 
 .diagrams {
   grid-area: diagrams;
-  border-radius: 20px 0px 0px 20px;
-  background-color: var(--color-1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.diagrams > canvas {
-    outline: blue solid;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
 }
 
-.menu {
-  grid-area: menu;
-  border-radius: 0px 0px 20px 0px;
+.summary {
+  grid-area: summary;
+}
+
+.contributors {
+  grid-area: contributors;
+}
+
+.feet {
   display: grid;
-  gap: 0px 1em;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  padding-bottom: 1em;
-  padding-top: 0.5em;
-  background-color: var(--color-1);
-  justify-items: center;
-}
-.menu > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 6em;
-  max-width: 6em;
-  background-color: var(--color-2);
-  border-radius: 10px 10px 10px 10px;
-}
-.menu > div:hover {
-  background-color: var(--color-a);
-  color: black;
-}
-
-.info {
-  grid-area: info;
-  border-radius: 0px 0px 0px 20px;
-  background-color: var(--color-1);
-  display: grid;
-  gap: 0px 1em;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-}
-.info > div:nth-child(1) {
-  border-radius: inherit;
-}
-.info > div {
-  align-self: center;
-  justify-self: center;
-  width: 100%;
-  height: 100%;
-  outline: solid salmon;
-}
-
-.footter {
-  grid-area: footter;
-  border-radius: 20px 0px 0px 0px;
-  background-color: var(--color-1);
-}
-
-.users {
-  direction: rtl;
-  overflow: auto;
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-a) var(--color-1);
-  border-radius: 0px 20px 0px 0px;
-  display: grid;
-  grid-auto-rows: 2.5em;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 1em 0px;
-  grid-area: users;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-right: 1em;
-  background-color: var(--color-1);
+  grid-auto-flow: row;
+  justify-content: center;
+  align-content: center;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-area: feet;
 }
-.user {
-  direction: ltr;
-  color: white;
-  background-color: var(--color-2);
-  display: grid;
-  border-radius: 0px 20px 20px 0px;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 0px 1em;
-  grid-template-areas: ". .";
-}
-.user:hover {
-  background-color: var(--color-a);
-  color: black;
-}
-.user > span {
-  padding-left: 1em;
-  font-size: medium;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  align-self: center;
-}
-.user > input {
-  justify-self: center;
-  align-self: center;
-  min-width: 30px;
-  min-height: 30px;
-  max-width: 30px;
-  max-height: 30px;
-  border: none;
-  appearance: none;
-  background-color: transparent;
-}
-.user > input::-webkit-color-swatch {
-  border-radius: 5px;
-  border: solid 3px var(--color-1);
-  cursor: pointer;
+.feet>div{
+  z-index: 100;
+  outline: solid brown;
 }
