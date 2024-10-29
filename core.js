@@ -180,25 +180,25 @@ ChartA();
 function loadData(){
   //todo
 }
-function loadUsers(){
-  sampleData.data.forEach((x)=>{
-    let domElement = document.createElement("div");
-    let span = document.createElement("span");
-    let input = document.createElement("input");
+// function loadUsers(){
+//   sampleData.data.forEach((x)=>{
+//     let domElement = document.createElement("div");
+//     let span = document.createElement("span");
+//     let input = document.createElement("input");
 
-    span.innerHTML = x.user;
-    input.type = "color";
-    input.value = "#AA00FF";
-    domElement.appendChild(span);
-    domElement.appendChild(input);
+//     span.innerHTML = x.user;
+//     input.type = "color";
+//     input.value = "#AA00FF";
+//     domElement.appendChild(span);
+//     domElement.appendChild(input);
 
-    domElement.classList.add("user");
-    usersContainer.appendChild(domElement);
-  });
-}
+//     domElement.classList.add("user");
+//     usersContainer.appendChild(domElement);
+//   });
+// }
 
 
 function initialize(){
-  loadUsers()
+  // loadUsers()
 }
 initialize();
