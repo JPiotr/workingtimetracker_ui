@@ -6,14 +6,15 @@
 /* @import url("/css/light-mc.css"); */
 
 div{
-  outline: solid turquoise;
+  /* outline: solid turquoise; */
+  border-radius: 10px;
 }
 
 body.dark{
   color: white;
   margin: 0;
   padding: 0;
-  background-color: var(--md-sys-color-background);
+  background-color: var(--md-sys-color-surface);
 }
 .container {
   width: 100dvw;
@@ -27,7 +28,7 @@ body.dark{
     "header header header header header"
     "users diagrams diagrams diagrams summary"
     "users diagrams diagrams diagrams summary"
-    "users diagrams diagrams diagrams feet"
+    "users diagrams diagrams diagrams summary"
     "users diagrams diagrams diagrams feet"
     "users diagrams diagrams diagrams feet"
     "users diagrams diagrams diagrams feet"
@@ -43,13 +44,16 @@ body.dark{
   grid-template-areas:
     "ext-info options options options options";
   grid-area: header;
+  background-color: var(--md-sys-color-surface-container-low);
 }
 
 .ext-info {
   grid-area: ext-info;
+  background-color: var(--md-sys-color-surface-container);
 }
 
 .options {
+  background-color: var(--md-sys-color-surface-container);
   padding: 1em;
   display: grid;
   grid-auto-columns: 1fr;
@@ -64,26 +68,47 @@ body.dark{
   grid-area: options;
 }
 .options>div{
-  outline: solid salmon;
+  background-color: var(--md-sys-color-surface-container-high);
 }
 
 .users {
+  background-color: var(--md-sys-color-surface-container-low);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 3em 1fr;
   gap: 1em 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "userSearchArea"
-    "usersArea";
+  "userSearchArea"
+  "usersArea";
   grid-area: users;
 }
 
 .userSearchArea {
+  background-color: var(--md-sys-color-surface-container-low);
   grid-area: userSearchArea;
+}
+.userSearchArea>input[type="search"]{
+  padding-left: 1em;
+  background-color: inherit;
+  color: var(--md-sys-color-secondary);
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-bottom: solid;
+  font-weight: bold;
+  font-size: 16pt;
+}
+.userSearchArea>input[type="search"]::-webkit-search-cancel-button{
+  display: none;
+}
+.userSearchArea>input[type="search"]:focus-visible {
+  outline: none;
+
 }
 
 .usersArea {
+  background-color: var(--md-sys-color-surface-container-low);
   padding: 0.5em 1em;
   display: grid;
   grid-auto-rows: 3em;
@@ -91,27 +116,71 @@ body.dark{
   grid-auto-flow: row;
   justify-content: stretch;
   align-content: start;
-  /* justify-items: center; */
   align-items: stretch;
   grid-area: usersArea;
+  
 }
 .usersArea>div{
-  outline: solid magenta;
+  cursor: pointer;
+  padding: 0px 0.5em 0px 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--md-sys-color-surface-container);
+}
+.usersArea>div:hover{
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+.usersArea>div.checked{
+  background-color: var(--md-sys-color-surface-container-high);
+}
+.usersArea>div.checked:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.usersArea>div>span{
+  color: var(--md-sys-color-primary);
+  font-weight: bold;
+  font-size: 14pt;
+
+}
+.usersArea>div>input[type="color"]{
+  appearance: none;
+  height: 100%;
+  border: none;  
+  background-color: inherit;
+  padding: 0;
+  margin: 0;
+}
+.usersArea>div>input::-webkit-color-swatch{
+  border: none;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .diagrams {
+  background-color: var(--md-sys-color-surface-container);
   grid-area: diagrams;
 }
 
 .summary {
   grid-area: summary;
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 0.5em;
+}
+.summary>#summaryCanvas.dark{
+  border-radius: inherit;
+  justify-self: center;
 }
 
 .contributors {
+  background-color: var(--md-sys-color-surface-container);
   grid-area: contributors;
 }
 
 .feet {
+  background-color: var(--md-sys-color-surface-container-low);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -122,13 +191,13 @@ body.dark{
   justify-items: stretch;
   align-items: stretch;
   grid-template-areas:
-    "."
-    "."
-    "."
-    ".";
+  "."
+  "."
+  "."
+  ".";
   grid-area: feet;
+  padding: 0.5em 1em;
 }
 .feet>div{
-  z-index: 100;
-  outline: solid brown;
+  background-color: var(--md-sys-color-surface-container);
 }

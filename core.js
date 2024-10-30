@@ -128,54 +128,65 @@ let sampleData = {
 };
 const usersContainer = document.querySelector(".users");
 
-const ctx = document.getElementById("diagram");
+const ctx = document.querySelector("#summaryCanvas");
 
-function ChartA(){    
+function SummaryChart(){    
     let labels = [];
-    let data = [
-      {
-        label: "Idle (min)",
-        data: [],
-        borderWidth: 1,
-      },
-      {
-        label: "Not idle (min)",
-        data: [],
-        borderWidth: 1,
-      },
-    ];
+    // let data = [
+    //   {
+    //     label: "Idle (min)",
+    //     data: [],
+    //     borderWidth: 1,
+    //   },
+    //   {
+    //     label: "Not idle (min)",
+    //     data: [],
+    //     borderWidth: 1,
+    //   },
+    // ];
+    let idle = 0;
+    let notIdle = 0;
     sampleData.data[0].dailySessions.forEach((x)=> labels.push(x.date));
     labels.forEach((x)=>{
       let dateInfo = sampleData.data[0].dailySessions.find((y)=>y.date == x);
-      let idle = 0;
-      let notIdle = 0;
 
       dateInfo.sessions.forEach((z)=>{
         idle += z.sessionInfo.idle;
         notIdle += z.sessionInfo.duration;
       });
-      data[0].data.push(idle/60/1000);
-      data[1].data.push(notIdle/60/1000);
+      // data[0].data.push(idle/60/1000);
+      // data[1].data.push(notIdle/60/1000);
     })
     
 
     new Chart(ctx, {
-      type: "bar",
+      type: "pie",
       data: {
-        labels: [...labels],
-        datasets: data
+        labels: ["Idle", "Not Idle"],
+        datasets: [
+          {
+            label: "Sum in file",
+            data: [idle / 60 / 1000, notIdle / 60 / 1000],
+            backgroundColor: [`rgb(255 186 177)`, `rgb(254 249 255)`],
+            hoverOffset: 5,
+            borderColor: `rgb(255 255 255)`,
+          },
+        ],
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true,
+        plugins: {
+          legend: {
+            position: `right`,
+            labels:{
+              color: `rgb(255 255 255)`,
+            }
           },
         },
       },
     });
 }
 
-ChartA();
+SummaryChart();
 
 function loadData(){
   //todo
