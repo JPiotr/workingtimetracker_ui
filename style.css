@@ -21,7 +21,7 @@ body.dark{
   height: 100dvh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr;
   gap: 2em 2em;
   grid-auto-flow: row;
   grid-template-areas:
@@ -29,10 +29,10 @@ body.dark{
     "users diagrams diagrams diagrams summary"
     "users diagrams diagrams diagrams summary"
     "users diagrams diagrams diagrams summary"
-    "users diagrams diagrams diagrams feet"
-    "users diagrams diagrams diagrams feet"
-    "users diagrams diagrams diagrams feet"
-    "users contributors contributors contributors feet";
+    "users diagrams diagrams diagrams feed"
+    "users diagrams diagrams diagrams feed"
+    "users diagrams diagrams diagrams feed"
+    "users contributors contributors contributors feed";
 }
 
 .header {
@@ -48,8 +48,15 @@ body.dark{
 }
 
 .ext-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   grid-area: ext-info;
   background-color: var(--md-sys-color-surface-container);
+}
+.ext-info>img{
+  height: 4dvh;
 }
 
 .options {
@@ -61,13 +68,12 @@ body.dark{
   grid-auto-flow: column;
   justify-content: center;
   align-content: stretch;
-  /* justify-items: center; */
-  /* align-items: center; */
   justify-self: stretch;
   align-self: stretch;
   grid-area: options;
 }
 .options>div{
+  max-width: 13dvh;
   background-color: var(--md-sys-color-surface-container-high);
 }
 
@@ -130,13 +136,13 @@ body.dark{
   background-color: var(--md-sys-color-surface-container);
 }
 .usersArea>div:hover{
-  background-color: var(--md-sys-color-surface-container-highest);
+  background-color: var(--md-sys-color-on-tertiary);
 }
 .usersArea>div.checked{
-  background-color: var(--md-sys-color-surface-container-high);
+  background-color: var(--md-sys-color-on-secondary);
 }
 .usersArea>div.checked:hover {
-  background-color: var(--md-sys-color-surface-container-highest);
+  background-color: var(--md-sys-color-on-tertiary);
 }
 
 .usersArea>div>span{
@@ -165,9 +171,19 @@ body.dark{
 }
 
 .summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   grid-area: summary;
   background-color: var(--md-sys-color-surface-container-low);
   padding: 0.5em;
+}
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-self: center;
+  width: 100%;
 }
 .summary>#summaryCanvas.dark{
   border-radius: inherit;
@@ -179,25 +195,35 @@ body.dark{
   grid-area: contributors;
 }
 
-.feet {
-  background-color: var(--md-sys-color-surface-container-low);
+.feed {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 1em 0px;
-  grid-auto-flow: row;
-  justify-content: center;
-  align-content: center;
-  justify-items: stretch;
-  align-items: stretch;
-  grid-template-areas:
-  "."
-  "."
-  "."
-  ".";
-  grid-area: feet;
-  padding: 0.5em 1em;
+  align-content: start;
+  padding: 0em 0em;
+  grid-area: feed;
 }
-.feet>div{
+.feed:hover .feed-element:not(:hover){
+  height: 5.5dvh;
+}
+.feed-element:nth-child(1){
+  height: 25dvh;
+}
+.feed-element{
   background-color: var(--md-sys-color-surface-container);
+  overflow: hidden;
+  height: 5.5dvh;
+  transition: height 1s ease-in-out;
+  padding: 0px 1em 0px 1em;
+}
+.feed-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.feed-content{
+
+}
+.feed-element:hover {
+  height: 25dvh;
 }
