@@ -5,16 +5,16 @@
 /* @import url("/css/dark-mc.css"); */
 /* @import url("/css/light-mc.css"); */
 
-div{
+div {
   /* outline: solid turquoise; */
   border-radius: 10px;
 }
 
-body.dark{
-  color: white;
+body.dark {
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
   margin: 0;
   padding: 0;
-  background-color: var(--md-sys-color-surface);
 }
 .container {
   width: 100dvw;
@@ -41,8 +41,7 @@ body.dark{
   grid-template-rows: 1fr;
   gap: 0px 1em;
   grid-auto-flow: row;
-  grid-template-areas:
-    "ext-info options options options options";
+  grid-template-areas: "ext-info options options options options";
   grid-area: header;
   background-color: var(--md-sys-color-surface-container-low);
 }
@@ -55,7 +54,7 @@ body.dark{
   grid-area: ext-info;
   background-color: var(--md-sys-color-surface-container);
 }
-.ext-info>img{
+.ext-info > img {
   height: 4dvh;
 }
 
@@ -72,7 +71,7 @@ body.dark{
   align-self: stretch;
   grid-area: options;
 }
-.options>div{
+.options > div {
   max-width: 13dvh;
   background-color: var(--md-sys-color-surface-container-high);
 }
@@ -85,8 +84,8 @@ body.dark{
   gap: 1em 0px;
   grid-auto-flow: row;
   grid-template-areas:
-  "userSearchArea"
-  "usersArea";
+    "userSearchArea"
+    "usersArea";
   grid-area: users;
 }
 
@@ -94,7 +93,7 @@ body.dark{
   background-color: var(--md-sys-color-surface-container-low);
   grid-area: userSearchArea;
 }
-.userSearchArea>input[type="search"]{
+.userSearchArea > input[type="search"] {
   padding-left: 1em;
   background-color: inherit;
   color: var(--md-sys-color-secondary);
@@ -105,12 +104,11 @@ body.dark{
   font-weight: bold;
   font-size: 16pt;
 }
-.userSearchArea>input[type="search"]::-webkit-search-cancel-button{
+.userSearchArea > input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
-.userSearchArea>input[type="search"]:focus-visible {
+.userSearchArea > input[type="search"]:focus-visible {
   outline: none;
-
 }
 
 .usersArea {
@@ -124,9 +122,8 @@ body.dark{
   align-content: start;
   align-items: stretch;
   grid-area: usersArea;
-  
 }
-.usersArea>div{
+.usersArea > div {
   cursor: pointer;
   padding: 0px 0.5em 0px 0.5em;
   display: flex;
@@ -135,31 +132,31 @@ body.dark{
   align-items: center;
   background-color: var(--md-sys-color-surface-container);
 }
-.usersArea>div:hover{
+.usersArea > div:hover {
   background-color: var(--md-sys-color-on-tertiary);
 }
-.usersArea>div.checked{
+.usersArea > div.checked {
   background-color: var(--md-sys-color-on-secondary);
 }
-.usersArea>div.checked:hover {
+.usersArea > div.checked:hover {
   background-color: var(--md-sys-color-on-tertiary);
 }
 
-.usersArea>div>span{
+.usersArea > div > span {
   color: var(--md-sys-color-primary);
   font-weight: bold;
-  font-size: 14pt;
-
+  font-size: 1.5rem;
 }
-.usersArea>div>input[type="color"]{
+.usersArea > div > input[type="color"] {
   appearance: none;
-  height: 100%;
-  border: none;  
+  height: 50%;
+  border: none;
   background-color: inherit;
+  cursor: pointer;
   padding: 0;
   margin: 0;
 }
-.usersArea>div>input::-webkit-color-swatch{
+.usersArea > div > input::-webkit-color-swatch {
   border: none;
   height: 100%;
   border-radius: 10px;
@@ -178,21 +175,19 @@ body.dark{
   background-color: var(--md-sys-color-surface-container-low);
   padding: 0.5em;
 }
-.buttons{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  justify-self: center;
-  width: 100%;
-}
-.summary>#summaryCanvas.dark{
+.summary > #summaryCanvas {
   border-radius: inherit;
   justify-self: center;
+  padding: inherit;
 }
 
 .contributors {
   background-color: var(--md-sys-color-surface-container);
   grid-area: contributors;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .feed {
@@ -202,28 +197,90 @@ body.dark{
   padding: 0em 0em;
   grid-area: feed;
 }
-.feed:hover .feed-element:not(:hover){
+.feed:hover .feed-element:nth-child(1):not(:hover) {
+  background-color: var(--md-sys-color-surface-container);
+  color: inherit;
   height: 5.5dvh;
 }
-.feed-element:nth-child(1){
-  height: 25dvh;
+
+.feed:hover .feed-element:nth-child(1):not(:hover) > .feed-info > h3{
+  color: var(--md-sys-color-primary);
 }
-.feed-element{
+.feed:hover .feed-element:nth-child(1):not(:hover) > .feed-info > h5{
+  color: var(--md-sys-color-primary);
+}
+
+.feed-element:nth-child(1) {
+  height: 25dvh;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+}
+.feed-element:nth-child(1) > .feed-info > h3 {
+  color: var(--md-sys-color-on-primary);
+}
+.feed-element:nth-child(1) > .feed-info > h5 {
+  color: var(--md-sys-color-on-primary);
+}
+.feed-element:nth-child(1) > .feed-content > a {
+  color: var(--md-sys-color-on-tertiary);
+}
+.feed-element {
   background-color: var(--md-sys-color-surface-container);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   height: 5.5dvh;
-  transition: height 1s ease-in-out;
+  transition: height 1s, background-color 500ms, color 200ms ease-in-out;
   padding: 0px 1em 0px 1em;
 }
-.feed-info{
+.feed-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
-.feed-content{
+.feed-info > h3 {
+  font-weight: bolder;
+  color: var(--md-sys-color-primary);
+  letter-spacing: 0.2rem;
+}
+.feed-info > h4 {
+  letter-spacing: 0.1rem;
+  font-weight: bold;
+  color: var(--md-sys-color-secondary);
+}
+.feed-info > h5 {
+  color: var(--md-sys-color-primary);
+}
+.feed-element:hover .feed-info > h3 {
+  color: var(--md-sys-color-on-primary);
+}
+.feed-element:hover .feed-info > h4 {
+  color: var(--md-sys-color-on-secondary);
+}
+.feed-element:hover .feed-info > h5 {
+  color: var(--md-sys-color-on-primary);
+}
+.feed-element:hover .feed-content > a {
+  color: var(--md-sys-color-on-tertiary);
+}
+.feed-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: justify;
+}
 
+.feed-content > a {
+  font-weight: bold;
+  padding: 0.5em 0em;
+  text-decoration: none;
+  color: var(--md-sys-color-tertiary);
+  align-self: center;
 }
 .feed-element:hover {
   height: 25dvh;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
 }
