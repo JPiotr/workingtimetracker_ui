@@ -128,67 +128,55 @@ let sampleData = {
 };
 const usersContainer = document.querySelector(".users");
 
-const ctx = document.querySelector("#summaryCanvas");
+const ctxSummary = document.querySelector("#summaryCanvas");
 
-function SummaryChart(){    
-    let labels = [];
-    // let data = [
-    //   {
-    //     label: "Idle (min)",
-    //     data: [],
-    //     borderWidth: 1,
-    //   },
-    //   {
-    //     label: "Not idle (min)",
-    //     data: [],
-    //     borderWidth: 1,
-    //   },
-    // ];
-    let idle = 0;
-    let notIdle = 0;
-    sampleData.data[0].dailySessions.forEach((x)=> labels.push(x.date));
-    labels.forEach((x)=>{
-      let dateInfo = sampleData.data[0].dailySessions.find((y)=>y.date == x);
+function SummaryChart(dataFromFile) {
+  let labels = [];
+  let idle = 0;
+  let notIdle = 0;
+  dataFromFile.data[0].dailySessions.forEach((x) => labels.push(x.date));
+  labels.forEach((x) => {
+    let dateInfo = dataFromFile.data[0].dailySessions.find((y) => y.date == x);
 
-      dateInfo.sessions.forEach((z)=>{
-        idle += z.sessionInfo.idle;
-        notIdle += z.sessionInfo.duration;
-      });
-      // data[0].data.push(idle/60/1000);
-      // data[1].data.push(notIdle/60/1000);
-    })
-    
+    dateInfo.sessions.forEach((z) => {
+      idle += z.sessionInfo.idle;
+      notIdle += z.sessionInfo.duration;
+    });
+  });
 
-    new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Idle", "Not Idle"],
-        datasets: [
-          {
-            label: "Sum in file",
-            data: [idle / 60 / 1000, notIdle / 60 / 1000],
-            backgroundColor: [`rgb(255 186 177)`, `rgb(254 249 255)`],
-            hoverOffset: 5,
-            borderColor: `rgb(255 255 255)`,
-          },
-        ],
+  new Chart(ctxSummary, {
+    type: "pie",
+    data: {
+      labels: ["Idle", "Not Idle"],
+      datasets: [
+        {
+          label: "Total time on file in minutes",
+          data: [idle / 60 / 1000, notIdle / 60 / 1000],
+          backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
+          hoverOffset: 20,
+          borderColor: `rgb(229 225 233)`,
+        },
+      ],
+    },
+    options: {
+      layout: {
+        padding: "10",
       },
-      options: {
-        plugins: {
-          legend: {
-            position: `right`,
-            labels:{
-              color: `rgb(255 255 255)`,
-            }
+      plugins: {
+        legend: {
+          position: `top`,
+          labels: {
+            color: `rgb(198 191 255)`,
           },
         },
       },
-    });
+    },
+  });
 }
 
-SummaryChart();
+// SummaryChart();
 
-function loadData(){
+function loadData() {
   //todo
 }
 // function loadUsers(){
@@ -207,9 +195,87 @@ function loadData(){
 //     usersContainer.appendChild(domElement);
 //   });
 // }
+class FeedUI {
+  rootElement = document.querySelector(".feed");
 
+  FeedUI() {}
 
-function initialize(){
+  createTextElement(
+    title,
+    date,
+    content,
+    linkText,
+    linkAddress,
+    isFirst = false
+  ) {
+    let domElement = document.createElement("div");
+    domElement.classList.add("feed-element");
+    let feedInfoElement = document.createElement("div");
+    feedInfoElement.classList.add("feed-info");
+    let feedContentElement = document.createElement("div");
+    feedContentElement.classList.add("feed-content");
+    let linkElement = document.createElement("a");
+
+    let titleElement = isFirst
+      ? document.createElement("h3")
+      : document.createElement("h4");
+    let timeElement = document.createElement("h5");
+    let contentElement = document.createElement("span");
+
+    titleElement.innerHTML = title;
+    timeElement.innerHTML = date;
+    contentElement.innerHTML = content;
+    linkElement.href = linkAddress;
+    linkElement.text = linkText;
+
+    feedInfoElement.appendChild(titleElement);
+    feedInfoElement.appendChild(timeElement);
+    feedContentElement.appendChild(contentElement);
+    feedContentElement.appendChild(linkElement);
+    domElement.appendChild(feedInfoElement);
+    domElement.appendChild(feedContentElement);
+    this.rootElement.appendChild(domElement);
+  }
+}
+class DataLoader {
+  DataLoader() {}
+
+  loadFeeds() {
+    return fetch("content\\feed.json")
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+        let counter = 0;
+        let isFirst = true;
+        json.feeds.forEach((element) => {
+          if(counter <= 3){
+            counter++;
+            let x = new FeedUI();
+            x.createTextElement(
+              element.title,
+              element.date,
+              element.content.content,
+              element.content.link.text,
+              element.content.link.link,
+              isFirst
+            );
+            isFirst = false;
+          }
+          else{return;}
+        });
+      })
+  }
+  loadSummaryData(){
+    SummaryChart(sampleData)
+  }
+}
+
+function initialize() {
   // loadUsers()
 }
 initialize();
+const loader = new DataLoader();
+loader.loadFeeds();
+loader.loadSummaryData();
+
