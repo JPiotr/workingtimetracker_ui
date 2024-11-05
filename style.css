@@ -77,7 +77,7 @@ body.dark {
 }
 
 .users {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 3em 1fr;
@@ -90,7 +90,7 @@ body.dark {
 }
 
 .userSearchArea {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container);
   grid-area: userSearchArea;
 }
 .userSearchArea > input[type="search"] {
@@ -103,6 +103,15 @@ body.dark {
   border-bottom: solid;
   font-weight: bold;
   font-size: 16pt;
+  transition: font-size 500ms;
+}
+.userSearchArea > input[type="search"]:focus-visible{
+  font-size: 10pt;
+}
+.userSearchArea > input::placeholder{
+  color : var(--md-sys-color-tertiary);
+  opacity: 0.6;
+  letter-spacing: 1pt;
 }
 .userSearchArea > input[type="search"]::-webkit-search-cancel-button {
   display: none;
@@ -112,7 +121,7 @@ body.dark {
 }
 
 .usersArea {
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container);
   padding: 0.5em 1em;
   display: grid;
   grid-auto-rows: 3em;
@@ -122,29 +131,41 @@ body.dark {
   align-content: start;
   align-items: stretch;
   grid-area: usersArea;
+  animation: noBorder 100ms 1;
 }
+
 .usersArea > div {
+  transition: background-color, color 500ms;
   cursor: pointer;
-  padding: 0px 0.5em 0px 0.5em;
+  padding: 0px 1em 0px 1em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--md-sys-color-surface-container);
+  border-bottom: solid;
+  color: var(--md-sys-color-secondary);
+  background-color: var(--md-sys-color-surface-container-high);
 }
 .usersArea > div:hover {
-  background-color: var(--md-sys-color-on-tertiary);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-bottom: solid var(--md-sys-color-inverse-primary);
 }
 .usersArea > div.checked {
-  background-color: var(--md-sys-color-on-secondary);
+  transition: background-color, color 500ms;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  border-bottom: solid var(--md-sys-color-on-secondary-fixed-variant);
 }
 .usersArea > div.checked:hover {
-  background-color: var(--md-sys-color-on-tertiary);
+  background-color: var(--md-sys-color-primary-fixed-variant);
+  color: var(--md-sys-color-primary);
+  border-bottom: solid var(--md-sys-color-primary);
 }
 
 .usersArea > div > span {
-  color: var(--md-sys-color-primary);
-  font-weight: bold;
+  font-weight: 100;
+  letter-spacing: 1pt;
   font-size: 1.5rem;
 }
 .usersArea > div > input[type="color"] {
