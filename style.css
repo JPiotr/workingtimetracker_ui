@@ -10,6 +10,32 @@ div {
   border-radius: 10px;
 }
 
+.hide{
+  display: none !important;
+}
+.oneUserContainer{
+  grid-template-areas:
+    "header header header header header"
+    "diagrams diagrams diagrams diagrams summary"
+    "diagrams diagrams diagrams diagrams summary"
+    "diagrams diagrams diagrams diagrams summary"
+    "diagrams diagrams diagrams diagrams feed"
+    "diagrams diagrams diagrams diagrams feed"
+    "diagrams diagrams diagrams diagrams feed"
+    "contributors contributors contributors contributors feed";
+}
+.multiUserContainer{
+  grid-template-areas:
+    "header header header header header"
+    "users diagrams diagrams diagrams summary"
+    "users diagrams diagrams diagrams summary"
+    "users diagrams diagrams diagrams summary"
+    "users diagrams diagrams diagrams feed"
+    "users diagrams diagrams diagrams feed"
+    "users diagrams diagrams diagrams feed"
+    "users contributors contributors contributors feed";
+}
+
 body.dark {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
@@ -24,15 +50,7 @@ body.dark {
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr;
   gap: 2em 2em;
   grid-auto-flow: row;
-  grid-template-areas:
-    "header header header header header"
-    "users diagrams diagrams diagrams summary"
-    "users diagrams diagrams diagrams summary"
-    "users diagrams diagrams diagrams summary"
-    "users diagrams diagrams diagrams feed"
-    "users diagrams diagrams diagrams feed"
-    "users diagrams diagrams diagrams feed"
-    "users contributors contributors contributors feed";
+  
 }
 
 .header {

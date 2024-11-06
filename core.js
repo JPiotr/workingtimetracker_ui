@@ -285,7 +285,15 @@ class DataLoader {
     SummaryChart(sampleData)
   }
   loadUsers(){
-    sampleData.data.forEach((x) => new UserUI().createUserElement(x.user));
+    let root = document.querySelector(".container");
+    if(sampleData.data.length > 1){
+      root.classList.add("multiUserContainer");
+      sampleData.data.forEach((x) => new UserUI().createUserElement(x.user));
+    }
+    else{
+      document.querySelector(".users").classList.add("hide");
+      root.classList.add("oneUserContainer");
+    }
   }
 }
 
