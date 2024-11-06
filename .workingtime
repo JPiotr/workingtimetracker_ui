@@ -4766,6 +4766,57 @@
                             "actionType": "Codding"
                         }
                     ]
+                },
+                {
+                    "date": "6.11.2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "982aad7b-5c7e-4b2e-8474-5487d5f0c4f8",
+                                "duration": 27,
+                                "idle": 27,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "74f6f05a-19df-4442-bb97-85a81beae05e",
+                                        "state": "Ongoing",
+                                        "begin": 1730907196661,
+                                        "end": 1730907196661,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "d8b5a345-3fd0-42f4-896b-e13d5e7eb857",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Ended",
+                                "durations": [
+                                    {
+                                        "id": "48d32c0f-759f-4695-a255-8c50a7d5fd97",
+                                        "state": "Ongoing",
+                                        "begin": 1730907196688,
+                                        "end": 1730907196688,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "77642288-c4ab-4fe9-9a55-500caa5505a1",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Idle",
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        }
+                    ]
                 }
             ]
         }
