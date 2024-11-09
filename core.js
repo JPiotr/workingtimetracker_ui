@@ -124,6 +124,13 @@ let sampleData = {
         },
       ],
     },
+    {
+      config:{
+        showIdle: false,
+      },
+      user: "JohnDoe",
+      dailySessions:[],
+    }
   ],
 };
 const usersContainer = document.querySelector(".users");
@@ -178,7 +185,9 @@ function SummaryChart(dataFromFile) {
 class UserUI {
   root = document.querySelector(".usersArea");
 
-  UserUI() {}
+  constructor() {
+    this.initSearch();
+  }
   createUserElement(name, color = this.getRandomColor()) {
     let domElement = document.createElement("div");
     let spanElement = document.createElement("span");
@@ -190,7 +199,7 @@ class UserUI {
 
     domElement.appendChild(spanElement);
     domElement.appendChild(inputElement);
-
+    domElement.classList.add("user");
     domElement.addEventListener("click", (ev) => {
       if (domElement.classList.contains("checked")) {
         domElement.classList.remove("checked");
@@ -207,6 +216,26 @@ class UserUI {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+  initSearch(){
+    let searchInput = document.querySelector("#searchInput");
+    searchInput.addEventListener("keyup", (ev) => {
+      var users = document.querySelectorAll(".user");
+      if (ev.target.value == "") {
+        users.forEach((user) => {
+          if (user.classList.contains("hide")) {
+            user.classList.remove("hide");
+          }
+        });
+      }
+      users.forEach((user) => {
+        if (!user.textContent.toLowerCase().includes(ev.target.value.toLowerCase())) {
+          user.classList.add("hide");
+        } else {
+          user.classList.contains("hide") ? user.classList.remove("hide") : "";
+        }
+      });
+    });
   }
 }
 
@@ -298,7 +327,7 @@ class DataLoader {
 }
 
 function initialize() {
-  // loadUsers()
+  
 }
 initialize();
 const loader = new DataLoader();
