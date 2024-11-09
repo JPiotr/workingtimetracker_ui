@@ -338,3 +338,93 @@ body.dark {
   background-color: var(--md-sys-color-secondary);
   color: var(--md-sys-color-on-secondary);
 }
+
+.fileInput{
+  z-index: 200;
+  padding: 0;
+  margin: 0;
+  position: absolute;  
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  backdrop-filter: blur(15px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* background-color: var(--md-sys-color-surface); */
+  /* opacity: 0.2; */
+}
+.fileInput>div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50dvw;
+  height: 50dvh;
+  background-color: var(--md-sys-color-secondary-container);
+}
+#fileMessage{
+  word-spacing: 3pt;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#fileMessage>h2>a{
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--md-sys-color-primary);
+  align-self: center;
+}
+#fileMessage>h2>a:visited{
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--md-sys-color-tertiary);
+  align-self: center;
+}
+#fileUpload{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+}
+.fileInput>div>input{
+  display: none;
+}
+.fileInput>div>label{
+  padding: 2em 0;
+}
+#fileDropArea::before{
+  content: "Drop file here";
+  justify-self: center;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 15pt;
+}
+#fileDropArea:hover{
+  border-style: solid;
+  background-color: var(--md-sys-color-on-primary);
+}
+#fileDropArea{
+  cursor: grabbing;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  height: 70%;
+  border-style: dashed;
+  border-color: var(--md-sys-color-outline);
+}
+#hideModal{
+  cursor: pointer;
+  padding: 0.5em;
+  border: solid var(--md-sys-color-outline);
+}
+#hideModal:hover{
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  border-color: var(--md-sys-color-on-secondary);
+}

@@ -9,25 +9,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="dark">
-    <div class="container">
+    <div class="fileInput">
+      <div>
+        <div id="fileMessage">
+          <h2>Welcome to <a href="https://marketplace.visualstudio.com/items?itemName=Oblitus.workingtimetracker"> WorkingTimeTracker </a> data visualizer!</h2>
+          <span>Tool was created to present Your tracked sessions.</span>
+          <span>Just upload <b>.workingtime</b> file.</span>
+        </div>
+        <div id="fileUpload">
+          <div id="fileDropArea">
+  
+          </div>
+        </div>
+        <div id="hideModal" class="hide">
+          Cancel
+        </div>
+      </div>
+    </div>
+    <div class="container multiUserContainer">
       <div class="header">
         <div class="ext-info">
-          <img src="/images/github-mark-white.svg" alt="Github">
-          <img src="/images/logo.svg" alt="Logo">
+          <img src="/images/github-mark-white.svg" alt="Github" />
+          <img src="/images/logo.svg" alt="Logo" />
         </div>
         <div class="options">
-            <div>Diagram 1</div>
-            <div>Diagram 2</div>
-            <div>Diagram 3</div>
-            <div>Diagram 4</div>
+          <div>Diagram 1</div>
+          <div>Diagram 2</div>
+          <div>Diagram 3</div>
+          <div>Diagram 4</div>
         </div>
       </div>
       <div class="users">
         <div class="userSearchArea">
-          <input id="searchInput" type="search" placeholder="username"/>
+          <input id="searchInput" type="search" placeholder="username" />
         </div>
-        <div class="usersArea">
-        </div>
+        <div class="usersArea"></div>
       </div>
       <div class="diagrams">
         <canvas id="mainCanvas"></canvas>
@@ -37,9 +53,7 @@
       </div>
       <div class="contributors">
         <span>Fell free to contribute! </span>
-        <h4>
-          <a href="https://github.com/JPiotr">@JPiotr</a> - 2024
-        </h4>
+        <h4><a href="https://github.com/JPiotr">@JPiotr</a> - 2024</h4>
       </div>
       <div class="feed"></div>
     </div>

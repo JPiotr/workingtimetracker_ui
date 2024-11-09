@@ -238,11 +238,8 @@ class UserUI {
     });
   }
 }
-
 class FeedUI {
   rootElement = document.querySelector(".feed");
-
-  FeedUI() {}
 
   createTextElement(
     title,
@@ -282,7 +279,8 @@ class FeedUI {
   }
 }
 class DataLoader {
-  DataLoader() {}
+  constructor() {
+  }
 
   loadFeeds() {
     return fetch("content\\feed.json")
@@ -316,22 +314,50 @@ class DataLoader {
   loadUsers(){
     let root = document.querySelector(".container");
     if(sampleData.data.length > 1){
+      root.classList.remove("oneUserContainer");
       root.classList.add("multiUserContainer");
       sampleData.data.forEach((x) => new UserUI().createUserElement(x.user));
     }
     else{
+      root.classList.remove("multiUserContainer");
       document.querySelector(".users").classList.add("hide");
       root.classList.add("oneUserContainer");
     }
   }
+}
+class FileLoader {
+  constructor(){
+    const modal = document.querySelector(".fileInput");
+    let dropArea = document.querySelector("#fileDropArea");
+    dropArea.addEventListener("dragover",(ev)=>{
+      ev.preventDefault();
+      console.log(ev);
+    });
+    dropArea.addEventListener("drop",(ev)=>{
+      ev.preventDefault();
+      let file = ev.dataTransfer.files[0];
+      const fileReader = new FileReader();
+      fileReader.onload = (event)=>{
+        sampleData = JSON.parse(fileReader.result);
+        const loader = new DataLoader();
+        loader.loadSummaryData();
+        loader.loadUsers();
+        modal.classList.add("hide");
+      }
+      fileReader.readAsText(file);
+    });
+  }
+
+
 }
 
 function initialize() {
   
 }
 initialize();
+const file = new FileLoader();
 const loader = new DataLoader();
 loader.loadFeeds();
-loader.loadSummaryData();
-loader.loadUsers();
+// loader.loadUsers();
+// loader.loadSummaryData();
 
