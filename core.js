@@ -31,8 +31,8 @@ let sampleData = {
             {
               sessionInfo: {
                 id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
-                duration: 9677,
-                idle: 472796,
+                duration: 1500,
+                idle: 750,
                 state: "Ongoing",
                 durations: [
                   {
@@ -63,8 +63,162 @@ let sampleData = {
             {
               sessionInfo: {
                 id: "94223a84-45c9-49ca-a012-3333ff735f15",
-                duration: 49,
-                idle: 16748,
+                duration: 500,
+                idle: 250,
+                state: "Ended",
+                durations: [
+                  {
+                    id: "36ec6001-84de-4328-a5a7-6e14d068bf58",
+                    state: "Ongoing",
+                    begin: 1730205803278,
+                    end: 1730205806578,
+                    duration: 3300,
+                  },
+                  {
+                    id: "6c2f94ea-82b8-4cfb-831d-deaea2a82420",
+                    state: "Idle",
+                    begin: 1730205786579,
+                    end: 1730205803278,
+                    duration: 16699,
+                  },
+                  {
+                    id: "aa5c4657-c652-4e7f-a427-9fb1bba9a701",
+                    state: "Ongoing",
+                    begin: 1730205786530,
+                    end: 1730205786579,
+                    duration: 49,
+                  },
+                ],
+              },
+              actionType: "Codding",
+            }
+          ],
+        },
+      ],
+    },
+    {
+      config: {
+        showIdle: true,
+      },
+      user: "JohnDoe",
+      dailySessions: [
+        {
+          date: "10/29/2024",
+          sessions: [
+            {
+              sessionInfo: {
+                id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                duration: 1000,
+                idle: 300,
+                state: "Ongoing",
+                durations: [
+                  {
+                    id: "7c62e469-87e8-4ae9-9707-86574878f529",
+                    state: "Ongoing",
+                    begin: 1730205785278,
+                    end: 1730205785278,
+                    duration: 0,
+                  },
+                  {
+                    id: "aa8dee0e-63dd-4d4e-8fcc-ba9254a62be6",
+                    state: "Idle",
+                    begin: 1730205322159,
+                    end: 1730205785278,
+                    duration: 463119,
+                  },
+                  {
+                    id: "f49b7bac-09d4-4d5c-9238-a10f28bfd805",
+                    state: "Ongoing",
+                    begin: 1730205313734,
+                    end: 1730205322159,
+                    duration: 8425,
+                  },
+                ],
+              },
+              actionType: "Documenting",
+            },
+            {
+              sessionInfo: {
+                id: "94223a84-45c9-49ca-a012-3333ff735f15",
+                duration: 300,
+                idle: 1000,
+                state: "Ended",
+                durations: [
+                  {
+                    id: "36ec6001-84de-4328-a5a7-6e14d068bf58",
+                    state: "Ongoing",
+                    begin: 1730205803278,
+                    end: 1730205806578,
+                    duration: 3300,
+                  },
+                  {
+                    id: "6c2f94ea-82b8-4cfb-831d-deaea2a82420",
+                    state: "Idle",
+                    begin: 1730205786579,
+                    end: 1730205803278,
+                    duration: 16699,
+                  },
+                  {
+                    id: "aa5c4657-c652-4e7f-a427-9fb1bba9a701",
+                    state: "Ongoing",
+                    begin: 1730205786530,
+                    end: 1730205786579,
+                    duration: 49,
+                  },
+                ],
+              },
+              actionType: "Codding",
+            }
+          ],
+        },
+      ],
+    },
+    {
+      config: {
+        showIdle: true,
+      },
+      user: "BillyBones",
+      dailySessions: [
+        {
+          date: "10/29/2024",
+          sessions: [
+            {
+              sessionInfo: {
+                id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                duration: 100,
+                idle: 10,
+                state: "Ongoing",
+                durations: [
+                  {
+                    id: "7c62e469-87e8-4ae9-9707-86574878f529",
+                    state: "Ongoing",
+                    begin: 1730205785278,
+                    end: 1730205785278,
+                    duration: 0,
+                  },
+                  {
+                    id: "aa8dee0e-63dd-4d4e-8fcc-ba9254a62be6",
+                    state: "Idle",
+                    begin: 1730205322159,
+                    end: 1730205785278,
+                    duration: 463119,
+                  },
+                  {
+                    id: "f49b7bac-09d4-4d5c-9238-a10f28bfd805",
+                    state: "Ongoing",
+                    begin: 1730205313734,
+                    end: 1730205322159,
+                    duration: 8425,
+                  },
+                ],
+              },
+              actionType: "Documenting",
+            },
+            {
+              sessionInfo: {
+                id: "94223a84-45c9-49ca-a012-3333ff735f15",
+                duration: 50,
+                idle: 1000,
                 state: "Ended",
                 durations: [
                   {
@@ -124,72 +278,104 @@ let sampleData = {
         },
       ],
     },
-    {
-      config:{
-        showIdle: false,
-      },
-      user: "JohnDoe",
-      dailySessions:[],
-    }
   ],
 };
 const usersContainer = document.querySelector(".users");
 
 const ctxSummary = document.querySelector("#summaryCanvas");
+const ctxMain = document.querySelector("#mainCanvas");
 
-function SummaryChart(dataFromFile) {
-  let labels = [];
-  let idle = 0;
-  let notIdle = 0;
-  dataFromFile.data[0].dailySessions.forEach((x) => labels.push(x.date));
-  labels.forEach((x) => {
-    let dateInfo = dataFromFile.data[0].dailySessions.find((y) => y.date == x);
+class ChartLoader {
+  summaryChart = "";
+  names = [];
+  constructor() {}
 
-    dateInfo.sessions.forEach((z) => {
-      idle += z.sessionInfo.idle;
-      notIdle += z.sessionInfo.duration;
+  calculateSummaryChartData(dataFromFile = sampleData) {
+    let idle = 0;
+    let notIdle = 0;
+
+    dataFromFile.data.forEach((user) => {
+      if (this.names.length != 0) {
+        if (this.names.includes(user.user)) {
+          user.dailySessions.forEach((daily) => {
+            daily.sessions.forEach((session) => {
+              notIdle += session.sessionInfo.duration;
+              idle += session.sessionInfo.idle;
+            });
+          });
+        }
+      } else {
+        user.dailySessions.forEach((daily) => {
+          daily.sessions.forEach((session) => {
+            notIdle += session.sessionInfo.duration;
+            idle += session.sessionInfo.idle;
+          });
+        });
+      }
     });
-  });
+    return [idle, notIdle];
+  }
 
-  new Chart(ctxSummary, {
-    type: "pie",
-    data: {
-      labels: ["Idle", "Not Idle"],
-      datasets: [
-        {
-          label: "Total time on file in minutes",
-          data: [idle / 60 / 1000, notIdle / 60 / 1000],
-          backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
-          hoverOffset: 20,
-          borderColor: `rgb(229 225 233)`,
-        },
-      ],
-    },
-    options: {
-      layout: {
-        padding: "10",
+  updateSummaryChart(data) {
+    this.summaryChart.data.datasets[0].data = [];
+    this.summaryChart.data.datasets[0].data.push(...data);
+    let label = "Total time on file in minutes";
+    if(this.names.length != 0){
+      label += " (";
+      let i = 0;
+      this.names.forEach((name)=>{
+        if(i > 0 && i < this.names.length){
+          label += ","
+        }
+        label += name
+        i++;
+      })
+      label += ")";
+    }
+    this.summaryChart.data.datasets[0].label = label;
+    this.summaryChart.update();
+  }
+
+  loadSummaryChart(ctx, data) {
+    this.summaryChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Idle", "Not Idle"],
+        datasets: [
+          {
+            label: "Total time on file in minutes",
+            data: [...data],
+            backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
+            hoverOffset: 20,
+            borderColor: `rgb(229 225 233)`,
+          },
+        ],
       },
-      plugins: {
-        legend: {
-          position: `top`,
-          labels: {
-            color: `rgb(198 191 255)`,
+      options: {
+        layout: {
+          padding: "10",
+        },
+        plugins: {
+          legend: {
+            position: `top`,
+            labels: {
+              color: `rgb(198 191 255)`,
+            },
           },
         },
       },
-    },
-  });
+    });
+  }
 }
-
-
 class UserUI {
   root = document.querySelector(".usersArea");
-
+  userElement = document.createElement("div");
+  userName = "";
   constructor() {
     this.initSearch();
   }
   createUserElement(name, color = this.getRandomColor()) {
-    let domElement = document.createElement("div");
+    this.userName = name;
     let spanElement = document.createElement("span");
     let inputElement = document.createElement("input");
 
@@ -197,17 +383,22 @@ class UserUI {
     inputElement.type = "color";
     inputElement.value = color;
 
-    domElement.appendChild(spanElement);
-    domElement.appendChild(inputElement);
-    domElement.classList.add("user");
-    domElement.addEventListener("click", (ev) => {
-      if (domElement.classList.contains("checked")) {
-        domElement.classList.remove("checked");
+    this.userElement.appendChild(spanElement);
+    this.userElement.appendChild(inputElement);
+    this.userElement.classList.add("user");
+    this.userElement.addEventListener("click", (ev) => {
+      if (this.userElement.classList.contains("checked")) {
+        this.userElement.classList.remove("checked");
+        loader.charsLoader.names.pop(this.userName);
       } else {
-        domElement.classList.add("checked");
+        loader.charsLoader.names.push(this.userName);
+        this.userElement.classList.add("checked");
       }
+      loader.charsLoader.updateSummaryChart(
+        loader.charsLoader.calculateSummaryChartData()
+      );
     });
-    this.root.appendChild(domElement);
+    this.root.appendChild(this.userElement);
   }
   getRandomColor() {
     var letters = "0123456789ABCDEF";
@@ -217,7 +408,7 @@ class UserUI {
     }
     return color;
   }
-  initSearch(){
+  initSearch() {
     let searchInput = document.querySelector("#searchInput");
     searchInput.addEventListener("keyup", (ev) => {
       var users = document.querySelectorAll(".user");
@@ -229,7 +420,11 @@ class UserUI {
         });
       }
       users.forEach((user) => {
-        if (!user.textContent.toLowerCase().includes(ev.target.value.toLowerCase())) {
+        if (
+          !user.textContent
+            .toLowerCase()
+            .includes(ev.target.value.toLowerCase())
+        ) {
           user.classList.add("hide");
         } else {
           user.classList.contains("hide") ? user.classList.remove("hide") : "";
@@ -279,19 +474,20 @@ class FeedUI {
   }
 }
 class DataLoader {
-  constructor() {
-  }
+  charsLoader = new ChartLoader();
+  users = [];
+  constructor() {}
 
   loadFeeds() {
     return fetch("content\\feed.json")
-    .then((response) => {
-      return response.json();
-    })
-    .then((json) => {
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
         let counter = 0;
         let isFirst = true;
         json.feeds.forEach((element) => {
-          if(counter <= 3){
+          if (counter <= 3) {
             counter++;
             let x = new FeedUI();
             x.createTextElement(
@@ -303,22 +499,27 @@ class DataLoader {
               isFirst
             );
             isFirst = false;
+          } else {
+            return;
           }
-          else{return;}
         });
-      })
+      });
   }
-  loadSummaryData(){
-    SummaryChart(sampleData)
+  loadSummaryData() {
+    this.charsLoader.loadSummaryChart(
+      ctxSummary,
+      this.charsLoader.calculateSummaryChartData(sampleData)
+    );
   }
-  loadUsers(){
+  loadUsers() {
     let root = document.querySelector(".container");
-    if(sampleData.data.length > 1){
+    if (sampleData.data.length > 1) {
       root.classList.remove("oneUserContainer");
       root.classList.add("multiUserContainer");
-      sampleData.data.forEach((x) => new UserUI().createUserElement(x.user));
-    }
-    else{
+      sampleData.data.forEach((x) => {
+        this.users.push(new UserUI().createUserElement(x.user));
+      });
+    } else {
       root.classList.remove("multiUserContainer");
       document.querySelector(".users").classList.add("hide");
       root.classList.add("oneUserContainer");
@@ -326,38 +527,33 @@ class DataLoader {
   }
 }
 class FileLoader {
-  constructor(){
+  constructor() {
     const modal = document.querySelector(".fileInput");
     let dropArea = document.querySelector("#fileDropArea");
-    dropArea.addEventListener("dragover",(ev)=>{
+    dropArea.addEventListener("dragover", (ev) => {
       ev.preventDefault();
       console.log(ev);
     });
-    dropArea.addEventListener("drop",(ev)=>{
+    dropArea.addEventListener("drop", (ev) => {
       ev.preventDefault();
       let file = ev.dataTransfer.files[0];
       const fileReader = new FileReader();
-      fileReader.onload = (event)=>{
+      fileReader.onload = (event) => {
         sampleData = JSON.parse(fileReader.result);
         const loader = new DataLoader();
         loader.loadSummaryData();
         loader.loadUsers();
         modal.classList.add("hide");
-      }
+      };
       fileReader.readAsText(file);
     });
   }
-
-
 }
 
-function initialize() {
-  
-}
+function initialize() {}
 initialize();
 const file = new FileLoader();
 const loader = new DataLoader();
 loader.loadFeeds();
-// loader.loadUsers();
-// loader.loadSummaryData();
-
+loader.loadUsers();
+loader.loadSummaryData();
