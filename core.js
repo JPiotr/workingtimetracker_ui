@@ -96,188 +96,6 @@ let globalData = {
         },
       ],
     },
-    // {
-    //   config: {
-    //     showIdle: true,
-    //   },
-    //   user: "JohnDoe",
-    //   dailySessions: [
-    //     {
-    //       date: "10/29/2024",
-    //       sessions: [
-    //         {
-    //           sessionInfo: {
-    //             id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
-    //             duration: 1000,
-    //             idle: 300,
-    //             state: "Ongoing",
-    //             durations: [
-    //               {
-    //                 id: "7c62e469-87e8-4ae9-9707-86574878f529",
-    //                 state: "Ongoing",
-    //                 begin: 1730205785278,
-    //                 end: 1730205785278,
-    //                 duration: 0,
-    //               },
-    //               {
-    //                 id: "aa8dee0e-63dd-4d4e-8fcc-ba9254a62be6",
-    //                 state: "Idle",
-    //                 begin: 1730205322159,
-    //                 end: 1730205785278,
-    //                 duration: 463119,
-    //               },
-    //               {
-    //                 id: "f49b7bac-09d4-4d5c-9238-a10f28bfd805",
-    //                 state: "Ongoing",
-    //                 begin: 1730205313734,
-    //                 end: 1730205322159,
-    //                 duration: 8425,
-    //               },
-    //             ],
-    //           },
-    //           actionType: "Documenting",
-    //         },
-    //         {
-    //           sessionInfo: {
-    //             id: "94223a84-45c9-49ca-a012-3333ff735f15",
-    //             duration: 300,
-    //             idle: 1000,
-    //             state: "Ended",
-    //             durations: [
-    //               {
-    //                 id: "36ec6001-84de-4328-a5a7-6e14d068bf58",
-    //                 state: "Ongoing",
-    //                 begin: 1730205803278,
-    //                 end: 1730205806578,
-    //                 duration: 3300,
-    //               },
-    //               {
-    //                 id: "6c2f94ea-82b8-4cfb-831d-deaea2a82420",
-    //                 state: "Idle",
-    //                 begin: 1730205786579,
-    //                 end: 1730205803278,
-    //                 duration: 16699,
-    //               },
-    //               {
-    //                 id: "aa5c4657-c652-4e7f-a427-9fb1bba9a701",
-    //                 state: "Ongoing",
-    //                 begin: 1730205786530,
-    //                 end: 1730205786579,
-    //                 duration: 49,
-    //               },
-    //             ],
-    //           },
-    //           actionType: "Codding",
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   config: {
-    //     showIdle: true,
-    //   },
-    //   user: "BillyBones",
-    //   dailySessions: [
-    //     {
-    //       date: "10/29/2024",
-    //       sessions: [
-    //         {
-    //           sessionInfo: {
-    //             id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
-    //             duration: 100,
-    //             idle: 10,
-    //             state: "Ongoing",
-    //             durations: [
-    //               {
-    //                 id: "7c62e469-87e8-4ae9-9707-86574878f529",
-    //                 state: "Ongoing",
-    //                 begin: 1730205785278,
-    //                 end: 1730205785278,
-    //                 duration: 0,
-    //               },
-    //               {
-    //                 id: "aa8dee0e-63dd-4d4e-8fcc-ba9254a62be6",
-    //                 state: "Idle",
-    //                 begin: 1730205322159,
-    //                 end: 1730205785278,
-    //                 duration: 463119,
-    //               },
-    //               {
-    //                 id: "f49b7bac-09d4-4d5c-9238-a10f28bfd805",
-    //                 state: "Ongoing",
-    //                 begin: 1730205313734,
-    //                 end: 1730205322159,
-    //                 duration: 8425,
-    //               },
-    //             ],
-    //           },
-    //           actionType: "Documenting",
-    //         },
-    //         {
-    //           sessionInfo: {
-    //             id: "94223a84-45c9-49ca-a012-3333ff735f15",
-    //             duration: 50,
-    //             idle: 1000,
-    //             state: "Ended",
-    //             durations: [
-    //               {
-    //                 id: "36ec6001-84de-4328-a5a7-6e14d068bf58",
-    //                 state: "Ongoing",
-    //                 begin: 1730205803278,
-    //                 end: 1730205806578,
-    //                 duration: 3300,
-    //               },
-    //               {
-    //                 id: "6c2f94ea-82b8-4cfb-831d-deaea2a82420",
-    //                 state: "Idle",
-    //                 begin: 1730205786579,
-    //                 end: 1730205803278,
-    //                 duration: 16699,
-    //               },
-    //               {
-    //                 id: "aa5c4657-c652-4e7f-a427-9fb1bba9a701",
-    //                 state: "Ongoing",
-    //                 begin: 1730205786530,
-    //                 end: 1730205786579,
-    //                 duration: 49,
-    //               },
-    //             ],
-    //           },
-    //           actionType: "Codding",
-    //         },
-    //         {
-    //           sessionInfo: {
-    //             id: "9f2c72c5-1e43-43c2-b0d8-9d0a196a832c",
-    //             duration: 0,
-    //             idle: 0,
-    //             state: "Ended",
-    //             durations: [
-    //               {
-    //                 id: "73b7bbd5-0e7d-4bc6-a5fc-3a5f2fb4289a",
-    //                 state: "Ongoing",
-    //                 begin: 1730209419726,
-    //                 end: 1730209419727,
-    //                 duration: 1,
-    //               },
-    //             ],
-    //           },
-    //           actionType: "Codding",
-    //         },
-    //         {
-    //           sessionInfo: {
-    //             id: "bba50bec-4252-4966-a93f-0063445b2ee1",
-    //             duration: 0,
-    //             idle: 0,
-    //             state: "Idle",
-    //             durations: [],
-    //           },
-    //           actionType: "Stop",
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
   ],
 };
 const usersContainer = document.querySelector(".users");
@@ -778,6 +596,102 @@ class FileLoader {
     });
   }
 }
+
+
+class Core {
+  version = "1.0.0.0";
+  extSavedData = {
+    extConfig: {
+      enums: [
+        {
+          name: "ActionType",
+          values: [
+            "Building",
+            "Codding",
+            "Debugging",
+            "Documenting",
+            "Idle",
+            "Testing",
+          ],
+        },
+        {
+          name: "SessionState",
+          values: ["Ongoing", "Idle", "Ended"],
+        },
+      ],
+    },
+    data: [
+      {
+        config: {
+          showIdle: true,
+        },
+        user: "JohnDoe",
+        dailySessions: [
+          {
+            date: "10/29/2024",
+            sessions: [
+              {
+                sessionInfo: {
+                  id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                  duration: 1500,
+                  idle: 750,
+                  state: "Ongoing",
+                  durations: [],
+                },
+                actionType: "Documenting",
+              },
+              {
+                sessionInfo: {
+                  id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                  duration: 1200,
+                  idle: 750,
+                  state: "Ongoing",
+                  durations: [],
+                },
+                actionType: "Building",
+              },
+              {
+                sessionInfo: {
+                  id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                  duration: 1000,
+                  idle: 750,
+                  state: "Ongoing",
+                  durations: [],
+                },
+                actionType: "Debugging",
+              },
+              {
+                sessionInfo: {
+                  id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                  duration: 4000,
+                  idle: 750,
+                  state: "Ongoing",
+                  durations: [],
+                },
+                actionType: "Codding",
+              },
+              {
+                sessionInfo: {
+                  id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
+                  duration: 2000,
+                  idle: 1750,
+                  state: "Ongoing",
+                  durations: [],
+                },
+                actionType: "Testing",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+  constructor() {}
+
+  init() {}
+  
+}
+
 
 const file = new FileLoader();
 let loader = new DataLoader();
