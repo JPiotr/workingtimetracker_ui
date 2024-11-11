@@ -1,4 +1,4 @@
-let sampleData = {
+let globalData = {
   extConfig: {
     enums: [
       {
@@ -91,7 +91,7 @@ let sampleData = {
                 ],
               },
               actionType: "Codding",
-            }
+            },
           ],
         },
       ],
@@ -168,7 +168,7 @@ let sampleData = {
                 ],
               },
               actionType: "Codding",
-            }
+            },
           ],
         },
       ],
@@ -284,19 +284,29 @@ const usersContainer = document.querySelector(".users");
 
 const ctxSummary = document.querySelector("#summaryCanvas");
 const ctxMain = document.querySelector("#mainCanvas");
-
-class ChartLoader {
-  summaryChart = "";
-  names = [];
-  constructor() {}
-
-  calculateSummaryChartData(dataFromFile = sampleData) {
+//todo refactor this!
+class ChartUI {
+  name = "Base";
+  chart = new Chart();
+  calculate() {
+    console.error("Method not implemented!");
+  }
+  update() {
+    console.error("Method not implemented!");
+  }
+  load() {
+    console.error("Method not implemented!");
+  }
+}
+class SummaryChart extends ChartUI {
+  name = "Summary Chart";
+  calculate(dataFromFile, names = []) {
     let idle = 0;
     let notIdle = 0;
 
     dataFromFile.data.forEach((user) => {
-      if (this.names.length != 0) {
-        if (this.names.includes(user.user)) {
+      if (names.length != 0) {
+        if (names.includes(user.user)) {
           user.dailySessions.forEach((daily) => {
             daily.sessions.forEach((session) => {
               notIdle += session.sessionInfo.duration;
@@ -315,29 +325,27 @@ class ChartLoader {
     });
     return [idle, notIdle];
   }
-
-  updateSummaryChart(data) {
-    this.summaryChart.data.datasets[0].data = [];
-    this.summaryChart.data.datasets[0].data.push(...data);
+  update(data, names = []) {
+    this.chart.data.datasets[0].data = [];
+    this.chart.data.datasets[0].data.push(...data);
     let label = "Total time on file in minutes";
-    if(this.names.length != 0){
+    if (names.length != 0) {
       label += " (";
       let i = 0;
-      this.names.forEach((name)=>{
-        if(i > 0 && i < this.names.length){
-          label += ","
+      names.forEach((name) => {
+        if (i > 0 && i < names.length) {
+          label += ",";
         }
-        label += name
+        label += name;
         i++;
-      })
+      });
       label += ")";
     }
-    this.summaryChart.data.datasets[0].label = label;
-    this.summaryChart.update();
+    this.chart.data.datasets[0].label = label;
+    this.chart.update();
   }
-
-  loadSummaryChart(ctx, data) {
-    this.summaryChart = new Chart(ctx, {
+  load(ctx, data) {
+    this.chart = new Chart(ctx, {
       type: "pie",
       data: {
         labels: ["Idle", "Not Idle"],
@@ -367,15 +375,151 @@ class ChartLoader {
     });
   }
 }
+class BarChart extends ChartUI {
+  name = ChartsOptionsUI.options[0].name;
+
+  calculate(fileData = globalData, names = [], idle = false) {
+    return new Promise((resolve=>{
+      let labels = [];
+      let userDatasets = [];
+      this._calculate(fileData, names, idle).then((value) => {
+        labels = value[0];
+        userDatasets = value[1];
+        resolve({ labels: labels, datasets: userDatasets });
+      });
+    }));
+  }
+  _calculate(fileData, names, idle) {
+    return new Promise((resolve) => {
+      let labels = fileData.extConfig.enums.find(
+        (x) => x.name == "ActionType"
+      ).values;
+      let dataSets = [];
+      
+      fileData.data.forEach((user) => {
+        let data = [];
+        let color = loader.users.find((usr) => usr.userName == user.user).color;
+        if (names.length != 0) {
+          if(names.includes(user.user)){
+            labels.forEach((lbl) => {
+              let d = 0;
+              user.dailySessions.forEach((daily) => {
+                daily.sessions.forEach((session) => {
+                  if (session.actionType == lbl && lbl != "Idle") {
+                    d += session.sessionInfo.duration;
+                  }
+                  if (lbl == "Idle") {
+                    d += session.sessionInfo.idle;
+                  }
+                });
+                data.push(d);
+              });
+            });
+            dataSets.push({
+              label: user.user,
+              data: data,
+              backgroundColor: [color],
+              borderColor: [color],
+              borderWidth: 1,
+            });
+          }
+        } else {
+          labels.forEach((lbl) => {
+            let d = 0;
+            user.dailySessions.forEach((daily) => {
+              daily.sessions.forEach((session) => {
+                if (session.actionType == lbl && lbl != "Idle") {
+                  d += session.sessionInfo.duration;
+                }
+                if (lbl == "Idle") {
+                  d += session.sessionInfo.idle;
+                }
+              });
+              data.push(d);
+            });
+          });
+          dataSets.push({
+            label: user.user,
+            data: data,
+            backgroundColor: [color],
+            borderColor: [color],
+            borderWidth: 1,
+          });
+        }
+
+
+        
+      });
+      resolve([labels, dataSets]);
+    });
+  }
+
+  update(data) {
+    data.then((value)=>{
+      this.chart.data = value;
+      this.chart.update();
+    })
+  }
+
+  load(ctx, data) {
+    data.then((value)=>{
+      this.chart = new Chart(ctx, {
+        type: "bar",
+        data: value,
+        options: {
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    })
+  }
+}
+
+class ChartLoader {
+  data = globalData;
+  summaryChart = new SummaryChart();
+  names = [];
+
+  charts = [new BarChart()];
+  currentChartName = this.charts[0].name;
+  currentMainChart = this.charts[0];
+  constructor(data = globalData) {
+    this.data = data;
+  }
+  setMainChart(name) {
+    this.currentMainChart = this.charts.find(
+      (x) => x.name == this.currentChartName
+    );
+  }
+  updateCharts() {
+    this.summaryChart.update(
+      this.summaryChart.calculate(this.data, this.names),
+      this.names
+    );
+    this.currentMainChart.update(
+      this.currentMainChart.calculate(this.data, this.names, false)
+    );
+  }
+  loadCharts(ctxSummary, ctxMain) {
+    this.summaryChart.load(ctxSummary, this.summaryChart.calculate(this.data));
+    this.currentMainChart.load(
+      ctxMain,
+      this.currentMainChart.calculate(this.data, [], false)
+    );
+  }
+}
 class UserUI {
   root = document.querySelector(".usersArea");
   userElement = document.createElement("div");
   userName = "";
+  color = "#AAA";
   constructor() {
     this.initSearch();
   }
   createUserElement(name, color = this.getRandomColor()) {
     this.userName = name;
+    this.color = color;
     let spanElement = document.createElement("span");
     let inputElement = document.createElement("input");
 
@@ -386,19 +530,26 @@ class UserUI {
     this.userElement.appendChild(spanElement);
     this.userElement.appendChild(inputElement);
     this.userElement.classList.add("user");
+    this.userElement.addEventListener("change",(ev)=>{
+      this.color = ev.target.value;
+      loader.charsLoader.updateCharts();
+    })
     this.userElement.addEventListener("click", (ev) => {
-      if (this.userElement.classList.contains("checked")) {
-        this.userElement.classList.remove("checked");
-        loader.charsLoader.names.pop(this.userName);
-      } else {
-        loader.charsLoader.names.push(this.userName);
-        this.userElement.classList.add("checked");
+      if(ev.target.classList.contains("user")){
+        if (this.userElement.classList.contains("checked")) {
+          this.userElement.classList.remove("checked");
+          loader.charsLoader.names.pop(this.userName);
+          loader.users.pop(this);
+        } else {
+          loader.charsLoader.names.push(this.userName);
+          loader.users.push(this);
+          this.userElement.classList.add("checked");
+        }
+        loader.charsLoader.updateCharts();
       }
-      loader.charsLoader.updateSummaryChart(
-        loader.charsLoader.calculateSummaryChartData()
-      );
     });
     this.root.appendChild(this.userElement);
+    return this;
   }
   getRandomColor() {
     var letters = "0123456789ABCDEF";
@@ -473,6 +624,78 @@ class FeedUI {
     this.rootElement.appendChild(domElement);
   }
 }
+class ChartOptionUI {
+  name = "";
+  value = "";
+  container = "";
+  active = false;
+  domElement = document.createElement("div");
+
+  constructor(name, value, contaner, root) {
+    this.name = name;
+    this.value = value;
+    this.container = contaner;
+
+    let iElement = document.createElement("i");
+    let spanElement = document.createElement("span");
+
+    iElement.classList.add("material-symbols-outlined");
+    iElement.textContent = value;
+    spanElement.textContent = name;
+    this.domElement.classList.add("chartOption");
+    this.domElement.appendChild(iElement);
+    this.domElement.appendChild(spanElement);
+
+    this.domElement.addEventListener("click", (ev) => this.changeState());
+    root.appendChild(this.domElement);
+  }
+  changeState() {
+    this.container.resetOthersState();
+    if (this.domElement.classList.contains("checked")) {
+      this.domElement.classList.remove("checked");
+      this.active = false;
+    } else {
+      this.domElement.classList.add("checked");
+      this.active = true;
+    }
+  }
+}
+class ChartsOptionsUI {
+  root = document.querySelector(".options");
+  children = [];
+  static options = [
+    {
+      name: "Bar Chart",
+      value: "bar_chart",
+    },
+    {
+      name: "Pie Chart",
+      value: "pie_chart",
+    },
+    {
+      name: "Lov Dziobuś",
+      value: "loyalty",
+    },
+  ];
+
+  constructor() {
+    ChartsOptionsUI.options.forEach((opt) => {
+      let child = new ChartOptionUI(opt.name, opt.value, this, this.root);
+      this.children.push(child);
+    });
+    this.children[0].changeState();
+  }
+  getActive() {
+    return this.children.find((child) => child.active);
+  }
+  resetOthersState() {
+    this.children.forEach((child) => {
+      if (child.active) {
+        child.domElement.classList.remove("checked");
+      }
+    });
+  }
+}
 class DataLoader {
   charsLoader = new ChartLoader();
   users = [];
@@ -505,18 +728,15 @@ class DataLoader {
         });
       });
   }
-  loadSummaryData() {
-    this.charsLoader.loadSummaryChart(
-      ctxSummary,
-      this.charsLoader.calculateSummaryChartData(sampleData)
-    );
+  loadCharts() {
+    this.charsLoader.loadCharts(ctxSummary, ctxMain);
   }
   loadUsers() {
     let root = document.querySelector(".container");
-    if (sampleData.data.length > 1) {
+    if (globalData.data.length > 1) {
       root.classList.remove("oneUserContainer");
       root.classList.add("multiUserContainer");
-      sampleData.data.forEach((x) => {
+      globalData.data.forEach((x) => {
         this.users.push(new UserUI().createUserElement(x.user));
       });
     } else {
@@ -532,17 +752,16 @@ class FileLoader {
     let dropArea = document.querySelector("#fileDropArea");
     dropArea.addEventListener("dragover", (ev) => {
       ev.preventDefault();
-      console.log(ev);
     });
     dropArea.addEventListener("drop", (ev) => {
       ev.preventDefault();
       let file = ev.dataTransfer.files[0];
       const fileReader = new FileReader();
       fileReader.onload = (event) => {
-        sampleData = JSON.parse(fileReader.result);
+        globalData = JSON.parse(fileReader.result);
         const loader = new DataLoader();
-        loader.loadSummaryData();
         loader.loadUsers();
+        loader.loadCharts();
         modal.classList.add("hide");
       };
       fileReader.readAsText(file);
@@ -556,4 +775,5 @@ const file = new FileLoader();
 const loader = new DataLoader();
 loader.loadFeeds();
 loader.loadUsers();
-loader.loadSummaryData();
+loader.loadCharts();
+const options = new ChartsOptionsUI();
