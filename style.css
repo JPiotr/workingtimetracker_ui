@@ -61,7 +61,6 @@ body.dark {
   grid-auto-flow: row;
   grid-template-areas: "ext-info options options options options";
   grid-area: header;
-  background-color: var(--md-sys-color-surface-container-low);
 }
 
 .ext-info {
@@ -83,15 +82,11 @@ body.dark {
   grid-auto-columns: 1fr;
   gap: 0px 1.5em;
   grid-auto-flow: column;
-  justify-content: center;
+  justify-content: space-around;
   align-content: stretch;
   justify-self: stretch;
   align-self: stretch;
   grid-area: options;
-}
-.options > div {
-  max-width: 13dvh;
-  background-color: var(--md-sys-color-surface-container-high);
 }
 
 .users {
@@ -202,6 +197,9 @@ body.dark {
 }
 
 .diagrams {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--md-sys-color-surface-container);
   grid-area: diagrams;
 }
@@ -351,8 +349,6 @@ body.dark {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* background-color: var(--md-sys-color-surface); */
-  /* opacity: 0.2; */
 }
 .fileInput>div{
   display: flex;
@@ -427,4 +423,38 @@ body.dark {
   background-color: var(--md-sys-color-secondary);
   color: var(--md-sys-color-on-secondary);
   border-color: var(--md-sys-color-on-secondary);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48
+}
+.chartOption{
+  cursor: pointer;
+  min-width: 6dvw;
+  max-width: 12dvw;
+  border-bottom: solid;
+  background-color: var(--md-sys-color-surface-container);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.chartOption.checked{
+  color: var(--md-sys-color-on-secondary);
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-inverse-primary);
+}
+.chartOption:hover{
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+.chartOption.checked:hover{
+  color: var(--md-sys-color-on-surface);
+}
+.chartOption>span{
+  letter-spacing: 2pt;
+  font-size: large;
+  font-weight: bold;
 }
