@@ -569,9 +569,10 @@ class DataLoader {
   }
 }
 class FileLoader {
+  modal = document.querySelector(".fileInput");
+  dropArea = document.querySelector("#fileDropArea");
+  
   constructor() {
-    const modal = document.querySelector(".fileInput");
-    let dropArea = document.querySelector("#fileDropArea");
     dropArea.addEventListener("dragover", (ev) => {
       ev.preventDefault();
     });
@@ -595,6 +596,7 @@ class FileLoader {
       fileReader.readAsText(file);
     });
   }
+
 }
 
 
@@ -686,10 +688,13 @@ class Core {
       },
     ],
   };
+  FileLoader = new FileLoader();
+  
   constructor() {}
 
+  preInit(){}
   init() {}
-  
+  mantain(){}
 }
 
 
