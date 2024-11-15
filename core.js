@@ -1,110 +1,14 @@
-let globalData = {
-  extConfig: {
-    enums: [
-      {
-        name: "ActionType",
-        values: [
-          "Building",
-          "Codding",
-          "Debugging",
-          "Documenting",
-          "Idle",
-          "Testing",
-        ],
-      },
-      {
-        name: "SessionState",
-        values: ["Ongoing", "Idle", "Ended"],
-      },
-    ],
-  },
-  data: [
-    {
-      config: {
-        showIdle: true,
-      },
-      user: "JPiotr",
-      dailySessions: [
-        {
-          date: "10/29/2024",
-          sessions: [
-            {
-              sessionInfo: {
-                id: "a68a25cc-1da5-4209-ae81-54ee187dee0b",
-                duration: 1500,
-                idle: 750,
-                state: "Ongoing",
-                durations: [
-                  {
-                    id: "7c62e469-87e8-4ae9-9707-86574878f529",
-                    state: "Ongoing",
-                    begin: 1730205785278,
-                    end: 1730205785278,
-                    duration: 0,
-                  },
-                  {
-                    id: "aa8dee0e-63dd-4d4e-8fcc-ba9254a62be6",
-                    state: "Idle",
-                    begin: 1730205322159,
-                    end: 1730205785278,
-                    duration: 463119,
-                  },
-                  {
-                    id: "f49b7bac-09d4-4d5c-9238-a10f28bfd805",
-                    state: "Ongoing",
-                    begin: 1730205313734,
-                    end: 1730205322159,
-                    duration: 8425,
-                  },
-                ],
-              },
-              actionType: "Documenting",
-            },
-            {
-              sessionInfo: {
-                id: "94223a84-45c9-49ca-a012-3333ff735f15",
-                duration: 500,
-                idle: 250,
-                state: "Ended",
-                durations: [
-                  {
-                    id: "36ec6001-84de-4328-a5a7-6e14d068bf58",
-                    state: "Ongoing",
-                    begin: 1730205803278,
-                    end: 1730205806578,
-                    duration: 3300,
-                  },
-                  {
-                    id: "6c2f94ea-82b8-4cfb-831d-deaea2a82420",
-                    state: "Idle",
-                    begin: 1730205786579,
-                    end: 1730205803278,
-                    duration: 16699,
-                  },
-                  {
-                    id: "aa5c4657-c652-4e7f-a427-9fb1bba9a701",
-                    state: "Ongoing",
-                    begin: 1730205786530,
-                    end: 1730205786579,
-                    duration: 49,
-                  },
-                ],
-              },
-              actionType: "Codding",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-const usersContainer = document.querySelector(".users");
 const ctxSummary = document.querySelector("#summaryCanvas");
 const ctxMain = document.querySelector("#mainCanvas");
-//todo refactor this!
+
 class ChartUI {
   name = "Base";
   chart = new Chart();
+  manager;
+  constructor(name, manager){
+    this.name = name;
+    this.manager = manager;
+  }
   calculate() {
     console.error("Method not implemented!");
   }
@@ -116,97 +20,113 @@ class ChartUI {
   }
 }
 class SummaryChart extends ChartUI {
-  name = "Summary Chart";
-  calculate(dataFromFile, names = []) {
-    let idle = 0;
-    let notIdle = 0;
-
-    dataFromFile.data.forEach((user) => {
-      if (names.length != 0) {
-        if (names.includes(user.user)) {
-          user.dailySessions.forEach((daily) => {
-            daily.sessions.forEach((session) => {
-              notIdle += session.sessionInfo.duration;
-              idle += session.sessionInfo.idle;
-            });
-          });
-        }
-      } else {
-        user.dailySessions.forEach((daily) => {
-          daily.sessions.forEach((session) => {
-            notIdle += session.sessionInfo.duration;
-            idle += session.sessionInfo.idle;
-          });
-        });
-      }
-    });
-    return [idle, notIdle];
+  idle = 0;
+  notIdle = 0;
+  constructor(manager) {
+    super("Summary Chart", manager);
   }
-  update(data, names = []) {
-    this.chart.data.datasets[0].data = [];
-    this.chart.data.datasets[0].data.push(...data);
-    let label = "Total time on file in minutes";
-    if (names.length != 0) {
-      label += " (";
-      let i = 0;
-      names.forEach((name) => {
-        if (i > 0 && i < names.length) {
-          label += ",";
+  calculate(dataFromFile, usersNames = []) {
+    return new Promise((resolve) => {
+      this.idle = 0;
+      this.notIdle = 0;
+
+      dataFromFile.data.forEach((user) => {
+        if (usersNames.length != 0) {
+          if (usersNames.includes(user.user)) {
+            this._determineValues(user).then((values) => {
+              resolve(values);
+            });
+          }
+        } else {
+          this._determineValues(user).then((values) => {
+            resolve(values);
+          });
         }
-        label += name;
-        i++;
       });
-      label += ")";
-    }
-    this.chart.data.datasets[0].label = label;
-    this.chart.update();
+    });
+  }
+  _determineValues(user) {
+    return new Promise((resolve) => {
+      user.dailySessions.forEach((daily) => {
+        daily.sessions.forEach((session) => {
+          this.notIdle += session.sessionInfo.duration;
+          this.idle += session.sessionInfo.idle;
+        });
+      });
+      resolve([this.idle, this.notIdle]);
+    });
+  }
+  update(data, usersNames = []) {
+    data.then((values)=>{
+      this.chart.data.datasets[0].data = [];
+      this.chart.data.datasets[0].data.push(...values);
+      let label = "Total time on file in minutes";
+      if (usersNames.length != 0) {
+        label += " (";
+        let i = 0;
+        usersNames.forEach((name) => {
+          if (i > 0 && i < usersNames.length) {
+            label += ",";
+          }
+          label += name;
+          i++;
+        });
+        label += ")";
+      }
+      this.chart.data.datasets[0].label = label;
+      this.chart.update();
+    });
   }
   load(ctx, data) {
-    this.chart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Idle", "Not Idle"],
-        datasets: [
-          {
-            label: "Total time on file in minutes",
-            data: [...data],
-            backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
-            hoverOffset: 20,
-            borderColor: `rgb(229 225 233)`,
-          },
-        ],
-      },
-      options: {
-        layout: {
-          padding: "10",
+    data.then((values)=>{
+      this.chart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: ["Idle", "Not Idle"],
+          datasets: [
+            {
+              label: "Total time on file in minutes",
+              data: [...values],
+              backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
+              hoverOffset: 20,
+              borderColor: `rgb(229 225 233)`,
+            },
+          ],
         },
-        plugins: {
-          legend: {
-            position: `top`,
-            labels: {
-              color: `rgb(198 191 255)`,
+        options: {
+          layout: {
+            padding: "10",
+          },
+          plugins: {
+            legend: {
+              position: `top`,
+              labels: {
+                color: `rgb(198 191 255)`,
+              },
             },
           },
         },
-      },
+      });
     });
   }
 }
 class BarChart extends ChartUI {
-  name = ChartsOptionsUI.options[0].name;
+  constructor(name, manager){
+    super(name, manager);
+  }
 
-  calculate(fileData = globalData, names = [], idle = false) {
+  calculate(fileData = globalData, names = []) {
     return new Promise((resolve=>{
       let labels = [];
       let userDatasets = [];
-      this._calculate(fileData, names, idle).then((value) => {
+      this._calculate(fileData, names).then((value) => {
         labels = value[0];
         userDatasets = value[1];
         resolve({ labels: labels, datasets: userDatasets });
       });
     }));
   }
-  _calculate(fileData, names, idle) {
+  _calculate(fileData, names) {
     return new Promise((resolve) => {
       let labels = fileData.extConfig.enums.find(
         (x) => x.name == "ActionType"
@@ -215,7 +135,7 @@ class BarChart extends ChartUI {
       
       fileData.data.forEach((user) => {
         let data = [];
-        let color = loader.users.find((usr) => usr.userName == user.user).color;
+        let color = DataLoader.users.find((usr) => usr.userName == user.user).color;
         if (names.length != 0) {
           if(names.includes(user.user)){
             labels.forEach((lbl) => {
@@ -229,8 +149,8 @@ class BarChart extends ChartUI {
                     d += session.sessionInfo.idle;
                   }
                 });
-                data.push(d);
               });
+              data.push(d);
             });
             dataSets.push({
               label: user.user,
@@ -270,14 +190,12 @@ class BarChart extends ChartUI {
       resolve([labels, dataSets]);
     });
   }
-
   update(data) {
     data.then((value)=>{
       this.chart.data = value;
       this.chart.update();
     })
   }
-
   load(ctx, data) {
     data.then((value)=>{
       this.chart = new Chart(ctx, {
@@ -292,42 +210,164 @@ class BarChart extends ChartUI {
     })
   }
 }
-
-
-class ChartLoader {
-  data;
-  summaryChart = new SummaryChart();
-  names = [];
-
-  charts = [new BarChart()];
-  currentChartName = this.charts[0].name;
-  currentMainChart = this.charts[0];
-  constructor(data = globalData) {
-    this.data = data;
+class PieChart extends ChartUI {
+  constructor(name, manager) {
+    super(name, manager);
   }
-  setMainChart(name) {
-    this.currentMainChart = this.charts.find(
-      (x) => x.name == this.currentChartName
+
+  calculate(fileData = globalData, names = []) {
+    return new Promise((resolve) => {
+      let labels = [];
+      let userDatasets = [];
+      this._calculate(fileData, names).then((value) => {
+        labels = value[0];
+        userDatasets = value[1];
+        resolve({ labels: labels, datasets: userDatasets });
+      });
+    });
+  }
+  _calculate(fileData, names) {
+    return new Promise((resolve) => {
+      let labels = fileData.extConfig.enums.find(
+        (x) => x.name == "ActionType"
+      ).values;
+      let dataSets = [];
+
+      fileData.data.forEach((user) => {
+        let data = [];
+        let color = DataLoader.users.find(
+          (usr) => usr.userName == user.user
+        ).color;
+        if (names.length != 0) {
+          if (names.includes(user.user)) {
+            labels.forEach((lbl) => {
+              let d = 0;
+              user.dailySessions.forEach((daily) => {
+                daily.sessions.forEach((session) => {
+                  if (session.actionType == lbl && lbl != "Idle") {
+                    d += session.sessionInfo.duration;
+                  }
+                  if (lbl == "Idle") {
+                    d += session.sessionInfo.idle;
+                  }
+                });
+              });
+              data.push(d);
+            });
+            dataSets.push({
+              label: user.user,
+              data: data,
+              backgroundColor: [color],
+              borderColor: [color],
+              borderWidth: 1,
+            });
+          }
+        } else {
+          labels.forEach((lbl) => {
+            let d = 0;
+            user.dailySessions.forEach((daily) => {
+              daily.sessions.forEach((session) => {
+                if (session.actionType == lbl && lbl != "Idle") {
+                  d += session.sessionInfo.duration;
+                }
+                if (lbl == "Idle") {
+                  d += session.sessionInfo.idle;
+                }
+              });
+              data.push(d);
+            });
+          });
+          dataSets.push({
+            label: user.user,
+            data: data,
+            backgroundColor: [color],
+            borderColor: [color],
+            borderWidth: 1,
+          });
+        }
+      });
+      resolve([labels, dataSets]);
+    });
+  }
+  update(data) {
+    data.then((value) => {
+      this.chart.data = value;
+      this.chart.update();
+    });
+  }
+  load(ctx, data) {
+    data.then((value) => {
+      this.chart = new Chart(ctx, {
+        type: "pie",
+        data: value,
+        options: {
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    });
+  }
+}
+class ChartsManager {
+  summaryChart = new SummaryChart(this);
+  avaliableChartsOptions = [];
+  optionsRoot = document.querySelector(".options");
+  chartOptionsUI = new ChartsOptionsUI();
+  activeChart = new ChartUI();
+  static usersNames = [];
+  constructor(){
+    this.avaliableChartsOptions = [
+      {
+        name: "Bar Chart",
+        icon: "bar_chart",
+        chart: new BarChart("Bar Chart", this),
+      },
+      {
+        name: "Pie Chart",
+        icon: "pie_chart",
+        chart: new PieChart("Pie Chart",this),
+      },
+      {
+        name: "Lov Dziobuś",
+        icon: "loyalty",
+      },
+    ];
+    this.chartOptionsUI = new ChartsOptionsUI(this.avaliableChartsOptions, this.optionsRoot);
+  }
+  init(){
+    this.chartOptionsUI.createDOMElements(this);
+  }
+  loadCharts() {
+    this.summaryChart.load(
+      ctxSummary,
+      this.summaryChart.calculate(Core.extSavedData, ChartsManager.usersNames)
+    );
+    let mainChart = this.getActiveChart();
+    this.activeChart = mainChart;
+    mainChart.chart.load(
+      ctxMain,
+      mainChart.chart.calculate(Core.extSavedData, ChartsManager.usersNames)
+    );
+  }
+  getActiveChart(){
+    return this.avaliableChartsOptions.find(
+      (chart) => chart.name == this.chartOptionsUI.getActive()
     );
   }
   updateCharts() {
-    this.summaryChart.update(
-      this.summaryChart.calculate(this.data, this.names),
-      this.names
-    );
-    this.currentMainChart.update(
-      this.currentMainChart.calculate(this.data, this.names, false)
-    );
+    
   }
-  loadCharts(ctxSummary, ctxMain) {
-    console.log(this.data);
-    this.summaryChart.load(ctxSummary, this.summaryChart.calculate(this.data));
-    this.currentMainChart.load(
+  reactOnStateChange(){
+    this.activeChart.chart.chart.destroy();
+    this.activeChart = this.getActiveChart();
+    this.activeChart.chart.load(
       ctxMain,
-      this.currentMainChart.calculate(this.data, [], false)
+      this.activeChart.chart.calculate(Core.extSavedData, ChartsManager.usersNames)
     );
   }
 }
+
 class UserUI {
   root = document.querySelector(".usersArea");
   userElement = document.createElement("div");
@@ -351,20 +391,20 @@ class UserUI {
     this.userElement.classList.add("user");
     this.userElement.addEventListener("change",(ev)=>{
       this.color = ev.target.value;
-      loader.charsLoader.updateCharts();
+      ChartsManager.updateCharts();
     })
     this.userElement.addEventListener("click", (ev) => {
       if(ev.target.classList.contains("user")){
         if (this.userElement.classList.contains("checked")) {
           this.userElement.classList.remove("checked");
-          loader.charsLoader.names.pop(this.userName);
+          ChartsManager.usersNames.pop(this.userName);
           loader.users.pop(this);
         } else {
-          loader.charsLoader.names.push(this.userName);
+          ChartsManager.usersNames.push(this.userName);
           loader.users.push(this);
           this.userElement.classList.add("checked");
         }
-        loader.charsLoader.updateCharts();
+        ChartsManager.updateCharts();
       }
     });
     this.root.appendChild(this.userElement);
@@ -444,28 +484,29 @@ class FeedUI {
   }
 }
 class ChartOptionUI {
+  manager;
   name = "";
-  value = "";
+  icon = "";
   container = "";
   active = false;
   domElement = document.createElement("div");
 
-  constructor(name, value, contaner, root) {
+  constructor(name, icon, contaner, root) {
+    this.icon = icon;
     this.name = name;
-    this.value = value;
     this.container = contaner;
 
     let iElement = document.createElement("i");
     let spanElement = document.createElement("span");
 
     iElement.classList.add("material-symbols-outlined");
-    iElement.textContent = value;
-    spanElement.textContent = name;
+    iElement.textContent = this.icon;
+    spanElement.textContent = this.name;
     this.domElement.classList.add("chartOption");
     this.domElement.appendChild(iElement);
     this.domElement.appendChild(spanElement);
 
-    this.domElement.addEventListener("click", (ev) => this.changeState());
+    this.domElement.addEventListener("click", () => this.changeState());
     root.appendChild(this.domElement);
   }
   changeState() {
@@ -477,49 +518,42 @@ class ChartOptionUI {
       this.domElement.classList.add("checked");
       this.active = true;
     }
+    this.manager.reactOnStateChange();
   }
 }
 class ChartsOptionsUI {
-  root = document.querySelector(".options");
+  root;
   children = [];
-  static options = [
-    {
-      name: "Bar Chart",
-      value: "bar_chart",
-    },
-    {
-      name: "Pie Chart",
-      value: "pie_chart",
-    },
-    {
-      name: "Lov Dziobuś",
-      value: "loyalty",
-    },
-  ];
+  options = [];
 
-  constructor() {
-    ChartsOptionsUI.options.forEach((opt) => {
-      let child = new ChartOptionUI(opt.name, opt.value, this, this.root);
+  constructor(options, root) {
+    this.root = root;
+    this.options = options;
+  }
+  createDOMElements(manager){
+    this.options.forEach((opt) => {
+      let child = new ChartOptionUI(opt.name, opt.icon, this, this.root);
+      child.manager = manager;
       this.children.push(child);
     });
-    this.children[0].changeState();
+    this.children[0].domElement.classList.add("checked");
+    this.children[0].active = true;
   }
   getActive() {
-    return this.children.find((child) => child.active);
+    return this.children.find((child) => child.active).name;
   }
   resetOthersState() {
     this.children.forEach((child) => {
       if (child.active) {
         child.domElement.classList.remove("checked");
+        child.active = false;
       }
     });
   }
 }
 class DataLoader {
-  charsLoader = new ChartLoader();
-  users = [];
-  constructor(data) {
-    this.charsLoader = new ChartLoader(data);
+  static users = [];
+  constructor() {
   }
 
   loadFeeds() {
@@ -549,19 +583,20 @@ class DataLoader {
         });
       });
   }
-  loadCharts() {
-    this.charsLoader.loadCharts(ctxSummary, ctxMain);
-  }
-  loadUsers(data = globalData) {
+  loadUsers() {
     let root = document.querySelector(".container");
-    if (data.data.length > 1) {
+    if (Core.extSavedData.data.length > 1) {
       root.classList.remove("oneUserContainer");
       root.classList.add("multiUserContainer");
-      data.data.forEach((x) => {
-        this.users.push(new UserUI().createUserElement(x.user));
+      Core.extSavedData.data.forEach((x) => {
+        DataLoader.users.push(new UserUI().createUserElement(x.user));
+        ChartsManager.usersNames.push(x.user);
       });
-    } else if (data.data.length == 1) {
-      this.users.push(new UserUI().createUserElement(data.data[0].user));
+    } else if (Core.extSavedData.data.length == 1) {
+      ChartsManager.usersNames.push(Core.extSavedData.data[0].user);
+      DataLoader.users.push(
+        new UserUI().createUserElement(Core.extSavedData.data[0].user)
+      );
       root.classList.remove("multiUserContainer");
       document.querySelector(".users").classList.add("hide");
       root.classList.add("oneUserContainer");
@@ -573,10 +608,10 @@ class FileLoader {
   dropArea = document.querySelector("#fileDropArea");
   
   constructor() {
-    dropArea.addEventListener("dragover", (ev) => {
+    this.dropArea.addEventListener("dragover", (ev) => {
       ev.preventDefault();
     });
-    dropArea.addEventListener("drop", (ev) => {
+    this.dropArea.addEventListener("drop", (ev) => {
       ev.preventDefault();
       let file = ev.dataTransfer.files[0];
       const fileReader = new FileReader();
@@ -586,11 +621,10 @@ class FileLoader {
           resolve(value);
         })
         promise.then((value)=>{
-          console.log(value);
-          loader = new DataLoader(value);
-          loader.loadUsers();
-          loader.loadCharts();
-          modal.classList.add("hide");
+          Core.extSavedData = value;
+          Core.DataLoader.loadUsers();
+          Core.ChartsManager.loadCharts();
+          this.modal.classList.add("hide");
         })
       };
       fileReader.readAsText(file);
@@ -601,8 +635,8 @@ class FileLoader {
 
 
 class Core {
-  version = "1.0.0.0";
-  extSavedData = {
+  static version = "1.0.0.0";
+  static extSavedData = {
     extConfig: {
       enums: [
         {
@@ -688,22 +722,20 @@ class Core {
       },
     ],
   };
-  FileLoader = new FileLoader();
-  
+  static FileLoader = new FileLoader();
+  static ChartsManager = new ChartsManager();
+  static DataLoader = new DataLoader();
   constructor() {}
 
-  preInit(){}
-  init() {}
-  mantain(){}
+  init() {
+    Core.ChartsManager.init();
+    Core.DataLoader.loadFeeds();
+  }
 }
 
 
-const file = new FileLoader();
-let loader = new DataLoader();
-loader.loadFeeds();
-// loader.loadUsers();
-// loader.loadCharts();
-const options = new ChartsOptionsUI();
+const core = new Core();
+core.init();
 
 
 
