@@ -303,94 +303,230 @@ class LineChart extends ChartUI {
     super(name, manager);
   }
 
-  calculate(fileData = globalData, names = []) {
+  calculate(fileData, names = []) {
     return new Promise((resolve) => {
       let labels = [];
       let userDatasets = [];
-      this._calculate(fileData, names).then((value) => {
-        labels = value[0];
-        userDatasets = value[1];
-        resolve({ labels: labels, datasets: userDatasets });
+      this._calculateAllTime(fileData, names).then((value) => {
+        resolve({
+          data: { labels: value[0], datasets: value[1] },
+          scale: value[2],
+        });
       });
     });
   }
-  _calculate(fileData, names) {
-    return new Promise((resolve) => {
-      let labels = fileData.extConfig.enums.find(
-        (x) => x.name == "ActionType"
-      ).values;
-      let dataSets = [];
-
-      fileData.data.forEach((user) => {
-        let data = [];
-        let color = DataLoader.users.find(
-          (usr) => usr.userName == user.user
-        ).color;
-        if (names.length != 0) {
-          if (names.includes(user.user)) {
-            labels.forEach((lbl) => {
-              let d = 0;
-              user.dailySessions.forEach((daily) => {
-                daily.sessions.forEach((session) => {
-                  if (session.actionType == lbl && lbl != "Idle") {
-                    d += session.sessionInfo.duration;
-                  }
-                  if (lbl == "Idle") {
-                    d += session.sessionInfo.idle;
-                  }
-                });
-              });
-              data.push(d);
-            });
-            dataSets.push({
-              label: user.user,
-              data: data,
-              backgroundColor: [color],
-              borderColor: [color],
-              borderWidth: 1,
-            });
-          }
-        } else {
-          labels.forEach((lbl) => {
-            let d = 0;
-            user.dailySessions.forEach((daily) => {
-              daily.sessions.forEach((session) => {
-                if (session.actionType == lbl && lbl != "Idle") {
-                  d += session.sessionInfo.duration;
-                }
-                if (lbl == "Idle") {
-                  d += session.sessionInfo.idle;
-                }
-              });
-              data.push(d);
-            });
-          });
-          dataSets.push({
-            label: user.user,
-            data: data,
-            backgroundColor: [color],
-            borderColor: [color],
-            borderWidth: 1,
+  _getAllTimeLabels(fileData, names) {
+    let daysInFile = [];
+    let labels = [];
+    fileData.data.forEach((user) => {
+      if (names.length != 0) {
+        if (names.includes(user.user)) {
+          user.dailySessions.forEach((date) => {
+            daysInFile.push(new Date(Date.parse(date.date)));
           });
         }
-      });
-      resolve([labels, dataSets]);
+      } else {
+        user.dailySessions.forEach((date) => {
+          daysInFile.push(new Date(Date.parse(date.date)));
+        });
+      }
     });
+    daysInFile = daysInFile.sort((a, b) => {
+      return a.getTime() - b.getTime();
+    });
+    for (
+      let i = 0;
+      i <
+      this._calculateDaysDiff(
+        daysInFile[0],
+        daysInFile[daysInFile.length - 1]
+      ) +
+        1;
+      i++
+    ) {
+      labels.push(
+        new Date(
+          daysInFile[0].getTime() + i * 24 * 60 * 60 * 1000
+        ).toLocaleDateString()
+      );
+    }
+    return labels;
+  }
+  _calculateAllTime(fileData, names) {
+    let dataSets = [];
+    return new Promise((resolve) => {
+      let labels = this._getAllTimeLabels(fileData, names);
+
+      const actions = fileData.extConfig.enums.find(
+        (x) => x.name == "ActionType"
+      ).values;
+      let idleData = [];
+      const idleIndex = actions.findIndex((l) => l == "Idle");
+      let wasIdleAction = false;
+      actions.forEach((action) => {
+        let data = [];
+        fileData.data.forEach((user) => {
+          if (names.length != 0) {
+            if (names.includes(user.user)) {
+              user.dailySessions.forEach((daily) => {
+                let idle = 0;
+                let act = 0;
+                daily.sessions.forEach((session) => {
+                  if (session.actionType == action && action != "Idle") {
+                    act += session.sessionInfo.duration;
+                    idle +=
+                      session.sessionInfo.idle - session.sessionInfo.duration;
+                  }
+                  if (
+                    session.actionType == "Idle" &&
+                    session.actionType == action
+                  ) {
+                    idle += session.sessionInfo.idle;
+                  }
+                });
+                if (action == "Idle") {
+                  idleData.push({
+                    x: new Date(Date.parse(daily.date)).toDateString(),
+                    y: idle,
+                  });
+                } else {
+                  data.push({
+                    x: new Date(Date.parse(daily.date)).toDateString(),
+                    y: act,
+                  });
+                  idleData.push({
+                    x: new Date(Date.parse(daily.date)).toDateString(),
+                    y: idle,
+                  });
+                }
+              });
+            }
+          } else {
+            user.dailySessions.forEach((daily) => {
+              let idle = 0;
+              let act = 0;
+              daily.sessions.forEach((session) => {
+                if (session.actionType == action && action != "Idle") {
+                  act += session.sessionInfo.duration;
+                  idle +=
+                    session.sessionInfo.idle - session.sessionInfo.duration;
+                }
+                if (
+                  session.actionType == "Idle" &&
+                  session.actionType == action
+                ) {
+                  idle += session.sessionInfo.idle;
+                }
+              });
+              if (action == "Idle") {
+                idleData.push({
+                  x: new Date(Date.parse(daily.date)).toDateString(),
+                  y: idle,
+                });
+              } else {
+                data.push({
+                  x: new Date(Date.parse(daily.date)).toDateString(),
+                  y: act,
+                });
+                idleData.push({
+                  x: new Date(Date.parse(daily.date)).toDateString(),
+                  y: idle,
+                });
+              }
+            });
+          }
+        });
+        if (action == "Idle") {
+          data = this._mergeAndSortData(idleData);
+          wasIdleAction = true;
+          idleData = [];
+        } else {
+          data = this._mergeAndSortData(data);
+          if (wasIdleAction) {
+            idleData = this._mergeAndSortData(idleData);
+            idleData.forEach((d) => {
+              d.x = new Date(Date.parse(d.x)).toLocaleDateString();
+            });
+            dataSets[idleIndex].data = this._mergeAndSortData([
+              ...dataSets[idleIndex].data,
+              ...idleData,
+            ]);
+          }
+        }
+        data.forEach((d) => {
+          d.x = new Date(Date.parse(d.x)).toLocaleDateString();
+        });
+        dataSets.push({
+          label: action,
+          fill: false,
+          data: data,
+        });
+      });
+
+      let largesScale = new Scale(1, "Temp");
+      dataSets.forEach((ds) => {
+        let data = ds.data.map((d) => d.y);
+        let tempScale = this.determineScale(data);
+        if (tempScale.divider > largesScale.divider) {
+          largesScale = tempScale;
+        }
+      });
+      dataSets.forEach((ds) => {
+        ds.data = ds.data.map((d) => {
+          return { x: d.x, y: d.y / largesScale.divider };
+        });
+      });
+      resolve([labels, dataSets, largesScale]);
+    });
+  }
+  _mergeAndSortData(data = []) {
+    const tempMap = new Map();
+    data.forEach((value) => {
+      if (tempMap.has(value.x)) {
+        tempMap.get(value.x).y += value.y;
+      } else {
+        tempMap.set(value.x, { ...value });
+      }
+    });
+    let merged = Array.from(tempMap.values());
+    return merged.sort((a, b) => {
+      return Date.parse(a.x) - Date.parse(b.x);
+    });
+  }
+  _calculateDaysDiff(date1, date2) {
+    return Math.floor(
+      (date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24)
+    );
   }
   update(data) {
     data.then((value) => {
-      this.chart.data = value;
+      this.chart.data = value.data;
+      let label = "Data presented in " + value.scale.name;
+      if (ChartsManager.usersNames.length != 0) {
+        label += " ( " + ChartsManager.usersNames + " )";
+      } else {
+        label += " (all users)";
+      }
+      this.chart.options.plugins.legend.title.text = label;
       this.chart.update();
     });
   }
   load(ctx, data) {
     data.then((value) => {
       this.chart = new Chart(ctx, {
-        type: "pie",
-        data: value,
+        type: "line",
+        data: value.data,
         options: {
           scales: {
             y: { beginAtZero: true },
+          },
+          plugins: {
+            legend: {
+              title: {
+                display: true,
+                text: "Data presented in " + value.scale.name + " (all users)",
+              },
+            },
           },
         },
       });
