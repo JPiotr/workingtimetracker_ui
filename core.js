@@ -56,68 +56,76 @@ class SummaryChart extends ChartUI {
   constructor(manager) {
     super("Summary Chart", manager);
   }
-  calculate(dataFromFile, usersNames = []) {
+  calculate(dataFromFile, usersNames) {
     return new Promise((resolve) => {
       this.idle = 0;
       this.notIdle = 0;
-
       dataFromFile.data.forEach((user) => {
         if (usersNames.length != 0) {
           if (usersNames.includes(user.user)) {
-            this._determineValues(user).then((values) => {
-              resolve(values);
+            user.dailySessions.forEach((daily) => {
+              daily.sessions.forEach((session) => {
+                if (session.actionType == "Idle") {
+                  this.idle += session.sessionInfo.idle;
+                } else {
+                  this.notIdle += session.sessionInfo.duration;
+                  this.idle +=
+                    session.sessionInfo.idle - session.sessionInfo.duration;
+                }
+              });
             });
           }
         } else {
-          this._determineValues(user).then((values) => {
-            resolve(values);
-          });
-        }
+          user.dailySessions.forEach((daily) => {
+            daily.sessions.forEach((session) => {
+              if (session.actionType == "Idle") {
+                this.idle += session.sessionInfo.idle;
+              } else {
+                this.notIdle += session.sessionInfo.duration;
+                this.idle +=
+                  session.sessionInfo.idle - session.sessionInfo.duration;
+              }
+            });
+  update(data, usersNames) {
+    data.then((values) => {
       });
+      let scale = this.determineScale([this.idle, this.notIdle]);
+      let calc = {
+        data: [this.idle, this.notIdle].map((val) => val / scale.divider),
+        scale: scale.name,
+      };
+      resolve(calc);
     });
   }
   _determineValues(user) {
     return new Promise((resolve) => {
-      user.dailySessions.forEach((daily) => {
-        daily.sessions.forEach((session) => {
-          this.notIdle += session.sessionInfo.duration;
-          this.idle += session.sessionInfo.idle;
-        });
-      });
-      resolve([this.idle, this.notIdle]);
+      resolve(calc);
     });
   }
-  update(data, usersNames = []) {
-    data.then((values)=>{
+  update(data, usersNames) {
+    data.then((values) => {
       this.chart.data.datasets[0].data = [];
-      this.chart.data.datasets[0].data.push(...values);
-      let label = "Total time on file in minutes";
+      this.chart.data.datasets[0].data.push(...values.data);
+      let label = "Total time on file in " + values.scale;
       if (usersNames.length != 0) {
-        label += " (";
-        let i = 0;
-        usersNames.forEach((name) => {
-          if (i > 0 && i < usersNames.length) {
-            label += ",";
-          }
-          label += name;
-          i++;
-        });
-        label += ")";
+        label += " (" + ChartsManager.usersNames + ")";
+      } else {
+        label += " (all users)";
       }
       this.chart.data.datasets[0].label = label;
       this.chart.update();
     });
   }
   load(ctx, data) {
-    data.then((values)=>{
+    data.then((values) => {
       this.chart = new Chart(ctx, {
         type: "pie",
         data: {
           labels: ["Idle", "Not Idle"],
           datasets: [
             {
-              label: "Total time on file in minutes",
-              data: [...values],
+              label: "Total time on file in " + values.scale + " (all users)",
+              data: [...values.data],
               backgroundColor: [`rgb(235 184 207)`, `rgb(198 191 255)`],
               hoverOffset: 20,
               borderColor: `rgb(229 225 233)`,
