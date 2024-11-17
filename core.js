@@ -30,9 +30,9 @@ class Scale {
 }
 class ChartUI {
   name = "Base";
-  chart = new Chart();
+  chart;
   manager;
-  constructor(name, manager){
+  constructor(name, manager) {
     this.name = name;
     this.manager = manager;
   }
