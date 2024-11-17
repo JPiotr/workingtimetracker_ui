@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <title>Working Time Tracker UI</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bar_chart,loyalty,pie_chart"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bar_chart,loyalty,show_chart"
     />
     <link rel="stylesheet" href="/css/dark.css" />
     <link rel="stylesheet" href="/css/light.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="dark">
-    <div class="fileInput">
+    <div class="fileInput hide">
       <div>
         <div id="fileMessage">
           <h2>
@@ -50,7 +51,8 @@
         <div class="usersArea"></div>
       </div>
       <div class="diagrams">
-        <canvas id="mainCanvas"></canvas>
+        <div class="calendar hide"></div>
+        <canvas class="" id="mainCanvas"></canvas>
       </div>
       <div class="summary">
         <canvas id="summaryCanvas" class="dark"></canvas>
