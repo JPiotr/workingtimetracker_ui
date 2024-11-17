@@ -533,6 +533,87 @@ class LineChart extends ChartUI {
     });
   }
 }
+class CalendarChart extends ChartUI {
+  constructor(manager, name) {
+    super(name, manager);
+  }
+  calend;
+  calculate(fileData, names) {
+    let events = [];
+    return new Promise((resolve) => {
+      fileData.data.forEach((user) => {
+        if(names.length != 0){
+          if (names.includes(user.user)){
+            user.dailySessions.forEach((daily) => {
+              daily.sessions.forEach((session) => {
+                session.sessionInfo.durations.forEach((dur) => {
+                  events.push({
+                    title:
+                      user.user + " " + session.actionType + " " + dur.state,
+                    start: new Date(dur.begin),
+                    end: new Date(dur.end),
+                    backgroundColor: DataLoader.users.find(
+                      (usr) => usr.userName == user.user
+                    ).color,
+                  });
+                });
+              });
+            });
+          }
+        }else{
+          user.dailySessions.forEach((daily) => {
+            daily.sessions.forEach((session) => {
+              session.sessionInfo.durations.forEach((dur) => {
+                  events.push({
+                    title: user.user + " " + session.actionType + " " + dur.state,
+                    start: new Date(dur.begin),
+                    end: new Date(dur.end),
+                    backgroundColor: DataLoader.users.find(
+                      (usr) => usr.userName == user.user
+                    ).color,
+                  });
+              });
+            });
+          });
+        }
+      });
+
+      resolve(events);
+    });
+  }
+  update(data) {
+    data.then((events)=>{
+      console.log(this.calend.getEventSources())
+      this.calend.getEventSources().forEach((es) => es.remove());
+      console.log(this.calend.getEventSources())
+      this.calend.addEventSource(events);
+      console.log(this.calend.getEventSources())
+    })
+  }
+  load(ctx, data) {
+    ctx.classList.add("hide");
+    calendar.classList.remove("hide");
+    data.then((events)=>{
+      this.calend = new FullCalendar.Calendar(calendar, {
+        initialView: "timeGridWeek",
+        nowIndicator: true,
+        slotEventOverlap:false,
+        slotDuration:'00:01:00',
+        locale: Intl.Locale.name,
+        allDaySlot:false,
+        headerToolbar: {
+          center: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+        },
+        views: {
+          timeGridWeek: {
+          },
+        },
+        events: events,
+      });
+      this.calend.render();
+    })
+  }
+}
 class ChartsManager {
   summaryChart = new SummaryChart(this);
   avaliableChartsOptions = [];
@@ -540,7 +621,7 @@ class ChartsManager {
   chartOptionsUI = new ChartsOptionsUI();
   activeChart = new ChartUI();
   static usersNames = [];
-  constructor(){
+  constructor() {
     this.avaliableChartsOptions = [
       {
         name: "Bar Chart",
