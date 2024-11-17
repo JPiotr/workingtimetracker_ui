@@ -45,6 +45,10 @@ class ChartUI {
   load() {
     console.error("Method not implemented!");
   }
+  determineScale(data = [1, 2]) {
+    const maxValue = Math.max(...data);
+    return Scale.whichScale(maxValue);
+  }
 }
 class SummaryChart extends ChartUI {
   idle = 0;
