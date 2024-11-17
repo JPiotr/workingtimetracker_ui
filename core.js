@@ -1057,15 +1057,10 @@ class Core {
   symulate() {
     Core.DataLoader.loadUsers();
     Core.ChartsManager.loadCharts();
+    //todo loading from dummysource
   }
 }
 
-
-
 const core = new Core();
 core.init();
-
-
-
-
-
+core.symulate();
