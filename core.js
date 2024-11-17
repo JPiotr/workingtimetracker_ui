@@ -1,6 +1,33 @@
 const ctxSummary = document.querySelector("#summaryCanvas");
 const ctxMain = document.querySelector("#mainCanvas");
+const calendar = document.querySelector(".calendar");
 
+class Scale {
+  divider = 1;
+  name = "Milliseconds";
+  constructor(divider, name) {
+    this.divider = divider;
+    this.name = name;
+  }
+  static Minutes = new Scale(60 * 1000, "Minutes"); //10
+  static Hours = new Scale(Scale.Minutes.divider * 60, "Hours");
+  static Days = new Scale(Scale.Hours.divider * 24, "Days");
+  static Weeks = new Scale(Scale.Days.divider * 7, "Weeks");
+
+  static whichScale(value) {
+    if (value < Scale.Minutes.divider) {
+      return new Scale(1, "Milliseconds");
+    } else if (value >= Scale.Minutes.divider && value < Scale.Hours.divider) {
+      return Scale.Minutes;
+    } else if (value >= Scale.Hours.divider && value < Scale.Days.divider) {
+      return Scale.Hours;
+    } else if (value >= Scale.Days.divider && value < Scale.Weeks.divider) {
+      return Scale.Days;
+    } else if (value > Scale.Weeks.divider) {
+      return Scale.Weeks;
+    }
+  }
+}
 class ChartUI {
   name = "Base";
   chart = new Chart();
