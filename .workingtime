@@ -1,0 +1,48 @@
+{
+    "extConfig": {
+        "enums": [
+            {
+                "name": "ActionType",
+                "values": [
+                    "Building",
+                    "Codding",
+                    "Debugging",
+                    "Documenting",
+                    "Idle",
+                    "Testing"
+                ]
+            },
+            {
+                "name": "SessionState",
+                "values": [
+                    "Ongoing",
+                    "Idle",
+                    "Ended"
+                ]
+            }
+        ]
+    },
+    "data": [
+        {
+            "config": true,
+            "user": "JPiotr",
+            "dailySessions": [
+                {
+                    "date": "Sun Nov 17 2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "89c56837-0166-46b5-b514-9bf8bff8a498",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Idle",
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
