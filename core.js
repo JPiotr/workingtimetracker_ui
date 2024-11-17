@@ -86,8 +86,8 @@ class SummaryChart extends ChartUI {
                   session.sessionInfo.idle - session.sessionInfo.duration;
               }
             });
-  update(data, usersNames) {
-    data.then((values) => {
+          });
+        }
       });
       let scale = this.determineScale([this.idle, this.notIdle]);
       let calc = {
@@ -150,20 +150,23 @@ class SummaryChart extends ChartUI {
   }
 }
 class BarChart extends ChartUI {
-  constructor(name, manager){
+  constructor(name, manager) {
     super(name, manager);
   }
 
-  calculate(fileData = globalData, names = []) {
-    return new Promise((resolve=>{
+  calculate(fileData, names) {
+    return new Promise((resolve) => {
       let labels = [];
       let userDatasets = [];
       this._calculate(fileData, names).then((value) => {
         labels = value[0];
         userDatasets = value[1];
-        resolve({ labels: labels, datasets: userDatasets });
+        resolve({
+          calclulatedData: { labels: labels, datasets: userDatasets },
+          scale: value[2],
+        });
       });
-    }));
+    });
   }
   _calculate(fileData, names) {
     return new Promise((resolve) => {
@@ -171,25 +174,42 @@ class BarChart extends ChartUI {
         (x) => x.name == "ActionType"
       ).values;
       let dataSets = [];
-      
+      let scale = new Scale(1, "Temp");
+
       fileData.data.forEach((user) => {
         let data = [];
-        let color = DataLoader.users.find((usr) => usr.userName == user.user).color;
+        let color = DataLoader.users.find(
+          (usr) => usr.userName == user.user
+        ).color;
         if (names.length != 0) {
-          if(names.includes(user.user)){
+          if (names.includes(user.user)) {
+            let idleTime = 0;
+            const idleIndex = labels.findIndex((l) => l == "Idle");
+            let wasIdleAdded = false;
             labels.forEach((lbl) => {
               let d = 0;
               user.dailySessions.forEach((daily) => {
                 daily.sessions.forEach((session) => {
                   if (session.actionType == lbl && lbl != "Idle") {
                     d += session.sessionInfo.duration;
+                    idleTime +=
+                      session.sessionInfo.idle - session.sessionInfo.duration;
                   }
-                  if (lbl == "Idle") {
-                    d += session.sessionInfo.idle;
+                  if (lbl == "Idle" && session.actionType == "Idle") {
+                    idleTime += session.sessionInfo.idle;
                   }
                 });
               });
-              data.push(d);
+              if (lbl == "Idle") {
+                data.push(idleTime);
+                wasIdleAdded = true;
+                idleTime = 0;
+              } else {
+                data.push(d);
+                if (wasIdleAdded) {
+                  data[idleIndex] += idleTime;
+                }
+              }
             });
             dataSets.push({
               label: user.user,
@@ -200,19 +220,33 @@ class BarChart extends ChartUI {
             });
           }
         } else {
+          let idleTime = 0;
+          const idleIndex = labels.findIndex((l) => l == "Idle");
+          let wasIdleAdded = false;
           labels.forEach((lbl) => {
             let d = 0;
             user.dailySessions.forEach((daily) => {
               daily.sessions.forEach((session) => {
                 if (session.actionType == lbl && lbl != "Idle") {
                   d += session.sessionInfo.duration;
+                  idleTime +=
+                    session.sessionInfo.idle - session.sessionInfo.duration;
                 }
-                if (lbl == "Idle") {
-                  d += session.sessionInfo.idle;
+                if (lbl == "Idle" && session.actionType == "Idle") {
+                  idleTime += session.sessionInfo.idle;
                 }
               });
-              data.push(d);
             });
+            if (lbl == "Idle") {
+              data.push(idleTime);
+              wasIdleAdded = true;
+              idleTime = 0;
+            } else {
+              data.push(d);
+              if (wasIdleAdded) {
+                data[idleIndex] += idleTime;
+              }
+            }
           });
           dataSets.push({
             label: user.user,
@@ -222,34 +256,49 @@ class BarChart extends ChartUI {
             borderWidth: 1,
           });
         }
-
-
-        
       });
-      resolve([labels, dataSets]);
+      let tempds = [];
+      dataSets.forEach((ds) => {
+        tempds.push(...ds.data);
+      });
+      scale = this.determineScale(tempds);
+      dataSets.forEach((d) => {
+        d.data = d.data.map((val) => val / scale.divider);
+      });
+      resolve([labels, dataSets, scale]);
     });
   }
   update(data) {
-    data.then((value)=>{
-      this.chart.data = value;
+    data.then((value) => {
+      this.chart.data = value.calclulatedData;
+      this.chart.options.plugins.legend.title.text =
+        "Data presented in " + value.scale.name;
       this.chart.update();
-    })
+    });
   }
   load(ctx, data) {
-    data.then((value)=>{
+    data.then((value) => {
       this.chart = new Chart(ctx, {
         type: "bar",
-        data: value,
+        data: value.calclulatedData,
         options: {
           scales: {
             y: { beginAtZero: true },
           },
+          plugins: {
+            legend: {
+              title: {
+                display: true,
+                text: "Data presented in " + value.scale.name,
+              },
+            },
+          },
         },
       });
-    })
+    });
   }
 }
-class PieChart extends ChartUI {
+class LineChart extends ChartUI {
   constructor(name, manager) {
     super(name, manager);
   }
