@@ -629,18 +629,22 @@ class ChartsManager {
         chart: new BarChart("Bar Chart", this),
       },
       {
-        name: "Pie Chart",
-        icon: "pie_chart",
-        chart: new PieChart("Pie Chart",this),
+        name: "Line Chart",
+        icon: "show_chart",
+        chart: new LineChart("Line Chart", this),
       },
       {
-        name: "Lov Dziobuś",
+        name: "Calendar",
         icon: "loyalty",
+        chart: new CalendarChart("Calendar", this),
       },
     ];
-    this.chartOptionsUI = new ChartsOptionsUI(this.avaliableChartsOptions, this.optionsRoot);
+    this.chartOptionsUI = new ChartsOptionsUI(
+      this.avaliableChartsOptions,
+      this.optionsRoot
+    );
   }
-  init(){
+  init() {
     this.chartOptionsUI.createDOMElements(this);
   }
   loadCharts() {
@@ -655,24 +659,42 @@ class ChartsManager {
       mainChart.chart.calculate(Core.extSavedData, ChartsManager.usersNames)
     );
   }
-  getActiveChart(){
+  getActiveChart() {
     return this.avaliableChartsOptions.find(
       (chart) => chart.name == this.chartOptionsUI.getActive()
     );
   }
   updateCharts() {
-    
+    this.summaryChart.update(
+      this.summaryChart.calculate(Core.extSavedData, ChartsManager.usersNames),
+      ChartsManager.usersNames
+    );
+    let mainChart = this.getActiveChart();
+    this.activeChart = mainChart;
+    mainChart.chart.update(
+      mainChart.chart.calculate(Core.extSavedData, ChartsManager.usersNames),
+      ChartsManager.usersNames
+    );
   }
-  reactOnStateChange(){
-    this.activeChart.chart.chart.destroy();
+  reactOnStateChange() {
+    if (!calendar.classList.contains("hide")) {
+      calendar.classList.add("hide");
+    }
+    if (this.activeChart.name == "Calendar") {
+    } else {
+      this.activeChart.chart.chart.destroy();
+    }
     this.activeChart = this.getActiveChart();
+    ctxMain.classList.remove("hide");
     this.activeChart.chart.load(
       ctxMain,
-      this.activeChart.chart.calculate(Core.extSavedData, ChartsManager.usersNames)
+      this.activeChart.chart.calculate(
+        Core.extSavedData,
+        ChartsManager.usersNames
+      )
     );
   }
 }
-
 class UserUI {
   root = document.querySelector(".usersArea");
   userElement = document.createElement("div");
@@ -690,26 +712,27 @@ class UserUI {
     spanElement.textContent = name;
     inputElement.type = "color";
     inputElement.value = color;
+    inputElement.classList.add("userInput");
 
     this.userElement.appendChild(spanElement);
     this.userElement.appendChild(inputElement);
     this.userElement.classList.add("user");
-    this.userElement.addEventListener("change",(ev)=>{
+    this.userElement.addEventListener("change", (ev) => {
       this.color = ev.target.value;
-      ChartsManager.updateCharts();
-    })
+      Core.ChartsManager.updateCharts();
+    });
     this.userElement.addEventListener("click", (ev) => {
-      if(ev.target.classList.contains("user")){
+      if (!ev.target.classList.contains("userInput")) {
         if (this.userElement.classList.contains("checked")) {
           this.userElement.classList.remove("checked");
-          ChartsManager.usersNames.pop(this.userName);
-          loader.users.pop(this);
+          ChartsManager.usersNames = ChartsManager.usersNames.filter(
+            (el) => el != this.userName
+          );
         } else {
-          ChartsManager.usersNames.push(this.userName);
-          loader.users.push(this);
           this.userElement.classList.add("checked");
+          ChartsManager.usersNames.push(this.userName);
         }
-        ChartsManager.updateCharts();
+        Core.ChartsManager.updateCharts();
       }
     });
     this.root.appendChild(this.userElement);
@@ -835,7 +858,7 @@ class ChartsOptionsUI {
     this.root = root;
     this.options = options;
   }
-  createDOMElements(manager){
+  createDOMElements(manager) {
     this.options.forEach((opt) => {
       let child = new ChartOptionUI(opt.name, opt.icon, this, this.root);
       child.manager = manager;
@@ -858,8 +881,7 @@ class ChartsOptionsUI {
 }
 class DataLoader {
   static users = [];
-  constructor() {
-  }
+  constructor() {}
 
   loadFeeds() {
     return fetch("content\\feed.json")
@@ -895,10 +917,8 @@ class DataLoader {
       root.classList.add("multiUserContainer");
       Core.extSavedData.data.forEach((x) => {
         DataLoader.users.push(new UserUI().createUserElement(x.user));
-        ChartsManager.usersNames.push(x.user);
       });
     } else if (Core.extSavedData.data.length == 1) {
-      ChartsManager.usersNames.push(Core.extSavedData.data[0].user);
       DataLoader.users.push(
         new UserUI().createUserElement(Core.extSavedData.data[0].user)
       );
@@ -911,7 +931,7 @@ class DataLoader {
 class FileLoader {
   modal = document.querySelector(".fileInput");
   dropArea = document.querySelector("#fileDropArea");
-  
+
   constructor() {
     this.dropArea.addEventListener("dragover", (ev) => {
       ev.preventDefault();
@@ -921,23 +941,21 @@ class FileLoader {
       let file = ev.dataTransfer.files[0];
       const fileReader = new FileReader();
       fileReader.onload = (event) => {
-        let promise = new Promise((resolve)=>{
-          let value = JSON.parse(fileReader.result); 
+        let promise = new Promise((resolve) => {
+          let value = JSON.parse(fileReader.result);
           resolve(value);
-        })
-        promise.then((value)=>{
+        });
+        promise.then((value) => {
           Core.extSavedData = value;
           Core.DataLoader.loadUsers();
           Core.ChartsManager.loadCharts();
           this.modal.classList.add("hide");
-        })
+        });
       };
       fileReader.readAsText(file);
     });
   }
-
 }
-
 
 class Core {
   static version = "1.0.0.0";
@@ -1036,7 +1054,12 @@ class Core {
     Core.ChartsManager.init();
     Core.DataLoader.loadFeeds();
   }
+  symulate() {
+    Core.DataLoader.loadUsers();
+    Core.ChartsManager.loadCharts();
+  }
 }
+
 
 
 const core = new Core();
