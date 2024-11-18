@@ -24,7 +24,9 @@
     },
     "data": [
         {
-            "config": true,
+            "config": {
+                "showIdle": true
+            },
             "user": "JPiotr",
             "dailySessions": [
                 {
@@ -1939,6 +1941,53 @@
                                 ]
                             },
                             "actionType": "Codding"
+                        }
+                    ]
+                },
+                {
+                    "date": "Mon Nov 18 2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "24982e41-b152-4629-ba0e-a08f22effab3",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Idle",
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "7e5cda39-e3b3-4196-8a21-9fff12d1cdcc",
+                                "duration": 33615,
+                                "idle": 165438,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "9c07034d-b17b-4a18-b860-3412d8f0e421",
+                                        "state": "Ongoing",
+                                        "begin": 1731922503046,
+                                        "end": 1731922503046,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "7ce1a298-bb42-491e-9f50-3980c3a35907",
+                                        "state": "Idle",
+                                        "begin": 1731922371223,
+                                        "end": 1731922503046,
+                                        "duration": 131823
+                                    },
+                                    {
+                                        "id": "81501fc5-094e-42f8-a636-cda0e086b006",
+                                        "state": "Ongoing",
+                                        "begin": 1731922339294,
+                                        "end": 1731922371223,
+                                        "duration": 31929
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
                         }
                     ]
                 }
