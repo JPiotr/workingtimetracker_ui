@@ -547,15 +547,18 @@ class CalendarChart extends ChartUI {
             user.dailySessions.forEach((daily) => {
               daily.sessions.forEach((session) => {
                 session.sessionInfo.durations.forEach((dur) => {
-                  events.push({
-                    title:
-                      user.user + " " + session.actionType + " " + dur.state,
-                    start: new Date(dur.begin),
-                    end: new Date(dur.end),
-                    backgroundColor: DataLoader.users.find(
-                      (usr) => usr.userName == user.user
-                    ).color,
-                  });
+                  if(dur.duration > 60*1000){
+                    events.push({
+                      title:
+                        user.user + " " + session.actionType + " " + dur.state,
+                      start: new Date(dur.begin),
+                      end: new Date(dur.end),
+                      backgroundColor: DataLoader.users.find(
+                        (usr) => usr.userName == user.user
+                      ).color,
+                    });
+
+                  }
                 });
               });
             });
@@ -1054,9 +1057,43 @@ class Core {
     Core.DataLoader.loadFeeds();
   }
   symulate() {
-    Core.DataLoader.loadUsers();
-    Core.ChartsManager.loadCharts();
-    //todo loading from dummysource
+    this.loadDummyData().then(
+      (value) => {
+        if (value) {
+          console.log(`Succesfully retrive data!`);
+          Core.DataLoader.loadUsers();
+          Core.ChartsManager.loadCharts();
+        }
+      },
+      (ms) => {
+        console.log(`Error occures: ${ms}`);
+        Core.DataLoader.loadUsers();
+        Core.ChartsManager.loadCharts();
+      }
+    );
+  }
+  loadDummyData() {
+    return new Promise((resolve,reject) => {
+      const host = "http://localhost:3000";
+      const routes = ["extConfig", "data"];
+      fetch(`${host}/${routes[0]}`,{method:"GET"})
+        .then((response) => {
+          return response.json();
+        })
+        .then((json) => {
+          Core.extSavedData.extConfig = json;
+          return fetch(`${host}/${routes[1]}`);
+        })
+        .then((response) => {
+          return response.json();
+        })
+        .then((json) => {
+          Core.extSavedData.data = json;
+          resolve(true);
+        }).catch((err)=>{
+          reject("JSON Server is not running!")
+        });
+    });
   }
 }
 
