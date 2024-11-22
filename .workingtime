@@ -2614,6 +2614,1199 @@
                             "actionType": "Idle"
                         }
                     ]
+                },
+                {
+                    "date": "Fri Nov 22 2024",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "4056e691-5cc4-443e-92e5-921a4d3d4980",
+                                "duration": 26926,
+                                "idle": 26926,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "6d28c0be-92f1-4e32-a213-25ddecfa30d1",
+                                        "state": "Ongoing",
+                                        "begin": 1732289991207,
+                                        "end": 1732289991207,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "92bb389a-6f21-4890-92ef-b1f2ec92638c",
+                                "duration": 3492,
+                                "idle": 3492,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "41471f5d-7ca3-4bc2-8af2-c3ac1c0b4c58",
+                                        "state": "Ongoing",
+                                        "begin": 1732290018133,
+                                        "end": 1732290018133,
+                                        "duration": 0
+                                    }
+                                ]
+                            },
+                            "actionType": "Documenting"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "9f2d2f3f-3d49-4bb8-a21e-cf3a4cc16e4e",
+                                "duration": 46,
+                                "idle": 3394,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "f8a3e074-df73-47ea-b60d-865f76ed9e21",
+                                        "state": "Ongoing",
+                                        "begin": 1732290025009,
+                                        "end": 1732290025009,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "08a75763-5a87-42c8-8663-ca8c7ea2be7e",
+                                        "state": "Idle",
+                                        "begin": 1732290021661,
+                                        "end": 1732290025009,
+                                        "duration": 3348
+                                    },
+                                    {
+                                        "id": "4d6754cb-a2d7-40a8-8b36-ee88f7bb32f6",
+                                        "state": "Ongoing",
+                                        "begin": 1732290021625,
+                                        "end": 1732290021661,
+                                        "duration": 36
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "cfd54f4f-3a69-43ac-a565-e002d0a4d854",
+                                "duration": 3640385,
+                                "idle": 7755468,
+                                "state": "Ended",
+                                "durations": [
+                                    {
+                                        "id": "ce16658a-9985-4dd9-bc44-b6ae117d72b4",
+                                        "state": "Ongoing",
+                                        "begin": 1732297780488,
+                                        "end": 1732297784491,
+                                        "duration": 4003
+                                    },
+                                    {
+                                        "id": "f2b4bba8-94e0-435a-a58f-4b1ba107a627",
+                                        "state": "Idle",
+                                        "begin": 1732297764462,
+                                        "end": 1732297780488,
+                                        "duration": 16026
+                                    },
+                                    {
+                                        "id": "6b3ef361-b6bb-45c4-b8e3-07ac0e01b74a",
+                                        "state": "Ongoing",
+                                        "begin": 1732297763106,
+                                        "end": 1732297764462,
+                                        "duration": 1356
+                                    },
+                                    {
+                                        "id": "9f8a2ed8-e028-44f1-af65-97b1fe9d2891",
+                                        "state": "Idle",
+                                        "begin": 1732297755467,
+                                        "end": 1732297763106,
+                                        "duration": 7639
+                                    },
+                                    {
+                                        "id": "a588f379-ac87-4ff8-85ef-70226e6b08cd",
+                                        "state": "Ongoing",
+                                        "begin": 1732297752772,
+                                        "end": 1732297755467,
+                                        "duration": 2695
+                                    },
+                                    {
+                                        "id": "6c0b59b9-a18e-4ff0-8aa1-d1bc18858a64",
+                                        "state": "Idle",
+                                        "begin": 1732297615796,
+                                        "end": 1732297752772,
+                                        "duration": 136976
+                                    },
+                                    {
+                                        "id": "b7b83d11-c511-4d41-bd62-c323ba47f59d",
+                                        "state": "Ongoing",
+                                        "begin": 1732297601655,
+                                        "end": 1732297615796,
+                                        "duration": 14141
+                                    },
+                                    {
+                                        "id": "619515e6-e03f-48f9-ae63-dbdbb60e64dd",
+                                        "state": "Idle",
+                                        "begin": 1732297592801,
+                                        "end": 1732297601655,
+                                        "duration": 8854
+                                    },
+                                    {
+                                        "id": "73ce8944-9f4a-41cc-9679-3ae45e0bbd4f",
+                                        "state": "Ongoing",
+                                        "begin": 1732297559955,
+                                        "end": 1732297592801,
+                                        "duration": 32846
+                                    },
+                                    {
+                                        "id": "85b0db19-0f62-4544-8221-dd2c79662788",
+                                        "state": "Idle",
+                                        "begin": 1732297555631,
+                                        "end": 1732297559955,
+                                        "duration": 4324
+                                    },
+                                    {
+                                        "id": "e22f5d24-4b83-403c-84dc-76fd498003f8",
+                                        "state": "Ongoing",
+                                        "begin": 1732297534110,
+                                        "end": 1732297555631,
+                                        "duration": 21521
+                                    },
+                                    {
+                                        "id": "0c2b438b-6f8f-4f9a-8895-909120f0fcb3",
+                                        "state": "Idle",
+                                        "begin": 1732297531350,
+                                        "end": 1732297534110,
+                                        "duration": 2760
+                                    },
+                                    {
+                                        "id": "acb6a509-f2f1-4ceb-81e9-23c84287d169",
+                                        "state": "Ongoing",
+                                        "begin": 1732297528238,
+                                        "end": 1732297531350,
+                                        "duration": 3112
+                                    },
+                                    {
+                                        "id": "b0f39d93-76d5-4839-b3a0-6c3b03595e34",
+                                        "state": "Idle",
+                                        "begin": 1732297509567,
+                                        "end": 1732297528238,
+                                        "duration": 18671
+                                    },
+                                    {
+                                        "id": "34bf0238-03ba-4bdb-bdcb-524761fceecb",
+                                        "state": "Ongoing",
+                                        "begin": 1732297504890,
+                                        "end": 1732297509567,
+                                        "duration": 4677
+                                    },
+                                    {
+                                        "id": "6a6b4c3a-3c77-4a66-beb2-6d408bb0b383",
+                                        "state": "Idle",
+                                        "begin": 1732297490259,
+                                        "end": 1732297504890,
+                                        "duration": 14631
+                                    },
+                                    {
+                                        "id": "805b328b-36a5-49a7-992d-c04e0f637ab8",
+                                        "state": "Ongoing",
+                                        "begin": 1732297488870,
+                                        "end": 1732297490259,
+                                        "duration": 1389
+                                    },
+                                    {
+                                        "id": "a78f6d56-e569-474c-885a-700ca43b8f92",
+                                        "state": "Idle",
+                                        "begin": 1732297487454,
+                                        "end": 1732297488870,
+                                        "duration": 1416
+                                    },
+                                    {
+                                        "id": "4b9e322d-a7bf-4d75-a69c-a38e3f5dfc20",
+                                        "state": "Ongoing",
+                                        "begin": 1732297480837,
+                                        "end": 1732297487454,
+                                        "duration": 6617
+                                    },
+                                    {
+                                        "id": "a0f9084e-e57a-4bce-bfd1-27ba8f60eb54",
+                                        "state": "Idle",
+                                        "begin": 1732297465894,
+                                        "end": 1732297480837,
+                                        "duration": 14943
+                                    },
+                                    {
+                                        "id": "9cd793bf-211d-422d-b598-37c57b849d53",
+                                        "state": "Ongoing",
+                                        "begin": 1732297414260,
+                                        "end": 1732297465894,
+                                        "duration": 51634
+                                    },
+                                    {
+                                        "id": "00c58904-9d46-4de0-bfa7-c60454cd5ccb",
+                                        "state": "Idle",
+                                        "begin": 1732297132981,
+                                        "end": 1732297414260,
+                                        "duration": 281279
+                                    },
+                                    {
+                                        "id": "5e5d3b5f-9996-4ac6-97c2-5389ffca9b52",
+                                        "state": "Ongoing",
+                                        "begin": 1732297130187,
+                                        "end": 1732297132981,
+                                        "duration": 2794
+                                    },
+                                    {
+                                        "id": "4d74ce30-7f94-4987-8b22-6dc6a22695fa",
+                                        "state": "Idle",
+                                        "begin": 1732297080708,
+                                        "end": 1732297130187,
+                                        "duration": 49479
+                                    },
+                                    {
+                                        "id": "59c5a32d-51c1-4711-bb76-1658d989eb8b",
+                                        "state": "Ongoing",
+                                        "begin": 1732297074089,
+                                        "end": 1732297080708,
+                                        "duration": 6619
+                                    },
+                                    {
+                                        "id": "25271982-8624-401b-a413-9069fe46e7ab",
+                                        "state": "Idle",
+                                        "begin": 1732297021838,
+                                        "end": 1732297074089,
+                                        "duration": 52251
+                                    },
+                                    {
+                                        "id": "c8989b8d-0f12-4d98-9d06-273c35d9a396",
+                                        "state": "Ongoing",
+                                        "begin": 1732297013903,
+                                        "end": 1732297021838,
+                                        "duration": 7935
+                                    },
+                                    {
+                                        "id": "da3d904a-b569-44c5-be3b-897f420426e9",
+                                        "state": "Idle",
+                                        "begin": 1732296903102,
+                                        "end": 1732297013903,
+                                        "duration": 110801
+                                    },
+                                    {
+                                        "id": "237ee4fa-7342-4b59-a29a-5f4bb9e1ee21",
+                                        "state": "Ongoing",
+                                        "begin": 1732296899712,
+                                        "end": 1732296903102,
+                                        "duration": 3390
+                                    },
+                                    {
+                                        "id": "e302817c-89a3-423f-9ebc-bea62b4223b0",
+                                        "state": "Idle",
+                                        "begin": 1732296879824,
+                                        "end": 1732296899712,
+                                        "duration": 19888
+                                    },
+                                    {
+                                        "id": "ea55d877-f154-4c0c-8170-b2f6d4fb8acf",
+                                        "state": "Ongoing",
+                                        "begin": 1732296860029,
+                                        "end": 1732296879824,
+                                        "duration": 19795
+                                    },
+                                    {
+                                        "id": "54cc6d6d-0d22-40d3-9392-cc893a3be75d",
+                                        "state": "Idle",
+                                        "begin": 1732296844193,
+                                        "end": 1732296860029,
+                                        "duration": 15836
+                                    },
+                                    {
+                                        "id": "506d72eb-e6b3-4411-98c0-a7d1209b2c38",
+                                        "state": "Ongoing",
+                                        "begin": 1732296836286,
+                                        "end": 1732296844193,
+                                        "duration": 7907
+                                    },
+                                    {
+                                        "id": "de5072d4-683d-4053-be2f-3d40b7c9e30a",
+                                        "state": "Idle",
+                                        "begin": 1732295980497,
+                                        "end": 1732296836286,
+                                        "duration": 855789
+                                    },
+                                    {
+                                        "id": "ce45f670-219d-43d6-ae1e-36da82184c82",
+                                        "state": "Ongoing",
+                                        "begin": 1732295973594,
+                                        "end": 1732295980497,
+                                        "duration": 6903
+                                    },
+                                    {
+                                        "id": "6f5754df-c6dc-4e8f-8fc4-4cf1c331a067",
+                                        "state": "Idle",
+                                        "begin": 1732295944800,
+                                        "end": 1732295973594,
+                                        "duration": 28794
+                                    },
+                                    {
+                                        "id": "df7191e2-bf22-46c9-9cce-5ec9a9be9c31",
+                                        "state": "Ongoing",
+                                        "begin": 1732295931554,
+                                        "end": 1732295944800,
+                                        "duration": 13246
+                                    },
+                                    {
+                                        "id": "942acb13-27b0-4055-aab8-f05ffca12fa5",
+                                        "state": "Idle",
+                                        "begin": 1732295910782,
+                                        "end": 1732295931554,
+                                        "duration": 20772
+                                    },
+                                    {
+                                        "id": "64ac0e33-91db-43c6-b2d0-bd1fa45e6b0b",
+                                        "state": "Ongoing",
+                                        "begin": 1732295867330,
+                                        "end": 1732295910782,
+                                        "duration": 43452
+                                    },
+                                    {
+                                        "id": "fbe2bc2a-8930-4646-a04a-1ebaee948c78",
+                                        "state": "Idle",
+                                        "begin": 1732295687415,
+                                        "end": 1732295867330,
+                                        "duration": 179915
+                                    },
+                                    {
+                                        "id": "2ceef5fb-a2eb-4367-9a37-78ce810edcd3",
+                                        "state": "Ongoing",
+                                        "begin": 1732295611578,
+                                        "end": 1732295687415,
+                                        "duration": 75837
+                                    },
+                                    {
+                                        "id": "b41e253b-bd4f-45ff-ba3f-bd5827fc5b8a",
+                                        "state": "Idle",
+                                        "begin": 1732295596537,
+                                        "end": 1732295611578,
+                                        "duration": 15041
+                                    },
+                                    {
+                                        "id": "376e05a1-492d-469b-98e7-9cdcc7ec1d26",
+                                        "state": "Ongoing",
+                                        "begin": 1732295387672,
+                                        "end": 1732295596537,
+                                        "duration": 208865
+                                    },
+                                    {
+                                        "id": "a2e75cb5-0bec-4544-8160-11094e384292",
+                                        "state": "Idle",
+                                        "begin": 1732295387409,
+                                        "end": 1732295387672,
+                                        "duration": 263
+                                    },
+                                    {
+                                        "id": "9199b818-6941-4fae-b2a4-b40016504ed6",
+                                        "state": "Ongoing",
+                                        "begin": 1732295348394,
+                                        "end": 1732295387409,
+                                        "duration": 39015
+                                    },
+                                    {
+                                        "id": "2b48b559-9ecc-441b-90f7-47c5367924a5",
+                                        "state": "Idle",
+                                        "begin": 1732295307569,
+                                        "end": 1732295348394,
+                                        "duration": 40825
+                                    },
+                                    {
+                                        "id": "a835f950-8753-4f93-8e3e-1bf45c87c04c",
+                                        "state": "Ongoing",
+                                        "begin": 1732295271962,
+                                        "end": 1732295307569,
+                                        "duration": 35607
+                                    },
+                                    {
+                                        "id": "1d2a814e-da4f-4428-9899-43c8a89c553f",
+                                        "state": "Idle",
+                                        "begin": 1732295263606,
+                                        "end": 1732295271962,
+                                        "duration": 8356
+                                    },
+                                    {
+                                        "id": "8a091964-75a0-489f-91ce-8aae013f9c80",
+                                        "state": "Ongoing",
+                                        "begin": 1732295096154,
+                                        "end": 1732295263606,
+                                        "duration": 167452
+                                    },
+                                    {
+                                        "id": "6b58e04e-50f4-4eec-b3ec-0796b9ba6680",
+                                        "state": "Idle",
+                                        "begin": 1732295087394,
+                                        "end": 1732295096154,
+                                        "duration": 8760
+                                    },
+                                    {
+                                        "id": "6f0a779a-3b34-43f7-83dd-199a24522802",
+                                        "state": "Ongoing",
+                                        "begin": 1732295078432,
+                                        "end": 1732295087394,
+                                        "duration": 8962
+                                    },
+                                    {
+                                        "id": "acc5e9ee-03df-4918-bfe2-b50b0a57e726",
+                                        "state": "Idle",
+                                        "begin": 1732294988310,
+                                        "end": 1732295078432,
+                                        "duration": 90122
+                                    },
+                                    {
+                                        "id": "60a286ab-fbd9-433f-ba9a-bf0d3470b019",
+                                        "state": "Ongoing",
+                                        "begin": 1732294925440,
+                                        "end": 1732294988310,
+                                        "duration": 62870
+                                    },
+                                    {
+                                        "id": "66bbf499-4f01-4571-b019-2a976b613af8",
+                                        "state": "Idle",
+                                        "begin": 1732294876985,
+                                        "end": 1732294925440,
+                                        "duration": 48455
+                                    },
+                                    {
+                                        "id": "a275cc88-e4a4-4fe5-acf9-d93cd30e0657",
+                                        "state": "Ongoing",
+                                        "begin": 1732294854039,
+                                        "end": 1732294876985,
+                                        "duration": 22946
+                                    },
+                                    {
+                                        "id": "623c7b8c-f84e-417b-a7fb-3c84deba4c7e",
+                                        "state": "Idle",
+                                        "begin": 1732294843114,
+                                        "end": 1732294854039,
+                                        "duration": 10925
+                                    },
+                                    {
+                                        "id": "baa530b7-7d1e-43a8-93eb-a50ff83012eb",
+                                        "state": "Ongoing",
+                                        "begin": 1732294841056,
+                                        "end": 1732294843114,
+                                        "duration": 2058
+                                    },
+                                    {
+                                        "id": "19a54c22-07fe-4b44-a6c2-6a21d87d2a98",
+                                        "state": "Idle",
+                                        "begin": 1732294831633,
+                                        "end": 1732294841056,
+                                        "duration": 9423
+                                    },
+                                    {
+                                        "id": "43d39df5-2fa8-43ca-8403-3ac856d01b06",
+                                        "state": "Ongoing",
+                                        "begin": 1732294805920,
+                                        "end": 1732294831633,
+                                        "duration": 25713
+                                    },
+                                    {
+                                        "id": "bdaee53d-f055-4ad4-b895-051eeb543f4a",
+                                        "state": "Idle",
+                                        "begin": 1732294799427,
+                                        "end": 1732294805920,
+                                        "duration": 6493
+                                    },
+                                    {
+                                        "id": "a111363f-cc63-44f4-8110-85010e2986e7",
+                                        "state": "Ongoing",
+                                        "begin": 1732294788999,
+                                        "end": 1732294799427,
+                                        "duration": 10428
+                                    },
+                                    {
+                                        "id": "dc7ee8a4-be2e-4d7a-bead-6c757ee6642f",
+                                        "state": "Idle",
+                                        "begin": 1732294787388,
+                                        "end": 1732294788999,
+                                        "duration": 1611
+                                    },
+                                    {
+                                        "id": "3832fdf9-b264-4fc8-8a31-a03e22b2a98a",
+                                        "state": "Ongoing",
+                                        "begin": 1732294772671,
+                                        "end": 1732294787388,
+                                        "duration": 14717
+                                    },
+                                    {
+                                        "id": "d349b1e0-cfcb-4931-bb9c-973f74ccd7ee",
+                                        "state": "Idle",
+                                        "begin": 1732294748653,
+                                        "end": 1732294772671,
+                                        "duration": 24018
+                                    },
+                                    {
+                                        "id": "cb01aafa-c9af-4305-b078-a69e60eb4ab6",
+                                        "state": "Ongoing",
+                                        "begin": 1732294680301,
+                                        "end": 1732294748653,
+                                        "duration": 68352
+                                    },
+                                    {
+                                        "id": "386b8a0d-9b65-47d7-8739-d0e56ec8d8e7",
+                                        "state": "Idle",
+                                        "begin": 1732294666443,
+                                        "end": 1732294680301,
+                                        "duration": 13858
+                                    },
+                                    {
+                                        "id": "b4bc6d7b-0035-4ffb-9be2-5f11b7218e63",
+                                        "state": "Ongoing",
+                                        "begin": 1732294633837,
+                                        "end": 1732294666443,
+                                        "duration": 32606
+                                    },
+                                    {
+                                        "id": "424fdd99-1464-492a-9d5b-d0b9cc0c8652",
+                                        "state": "Idle",
+                                        "begin": 1732294612579,
+                                        "end": 1732294633837,
+                                        "duration": 21258
+                                    },
+                                    {
+                                        "id": "31ee91f5-0eb8-41e2-b9d4-d9b91e1d6c99",
+                                        "state": "Ongoing",
+                                        "begin": 1732294608015,
+                                        "end": 1732294612579,
+                                        "duration": 4564
+                                    },
+                                    {
+                                        "id": "74f5ba66-0ef4-4003-8204-e53b8d78a603",
+                                        "state": "Idle",
+                                        "begin": 1732294592696,
+                                        "end": 1732294608015,
+                                        "duration": 15319
+                                    },
+                                    {
+                                        "id": "87d09bdd-247a-4a32-870d-2c2e2372e632",
+                                        "state": "Ongoing",
+                                        "begin": 1732294489283,
+                                        "end": 1732294592696,
+                                        "duration": 103413
+                                    },
+                                    {
+                                        "id": "1ef64b61-10d7-486f-93aa-7bd690950a53",
+                                        "state": "Idle",
+                                        "begin": 1732294487386,
+                                        "end": 1732294489283,
+                                        "duration": 1897
+                                    },
+                                    {
+                                        "id": "0cc157ed-9776-49e0-8762-6923ee655f78",
+                                        "state": "Ongoing",
+                                        "begin": 1732294421129,
+                                        "end": 1732294487386,
+                                        "duration": 66257
+                                    },
+                                    {
+                                        "id": "17ece3ef-932b-4b7b-94ee-8c69f924ac05",
+                                        "state": "Idle",
+                                        "begin": 1732294394687,
+                                        "end": 1732294421129,
+                                        "duration": 26442
+                                    },
+                                    {
+                                        "id": "eafa5fd8-491c-4da0-958f-79b186f4efc3",
+                                        "state": "Ongoing",
+                                        "begin": 1732294390858,
+                                        "end": 1732294394687,
+                                        "duration": 3829
+                                    },
+                                    {
+                                        "id": "099d7711-5c05-4a07-9c27-62850d2acf8a",
+                                        "state": "Idle",
+                                        "begin": 1732294353955,
+                                        "end": 1732294390858,
+                                        "duration": 36903
+                                    },
+                                    {
+                                        "id": "96bd3b77-9641-436b-9c26-8df980f5e319",
+                                        "state": "Ongoing",
+                                        "begin": 1732294343849,
+                                        "end": 1732294353955,
+                                        "duration": 10106
+                                    },
+                                    {
+                                        "id": "a0d8728c-cc2d-4896-ae93-46773a827bf3",
+                                        "state": "Idle",
+                                        "begin": 1732294317873,
+                                        "end": 1732294343849,
+                                        "duration": 25976
+                                    },
+                                    {
+                                        "id": "901db117-fe64-4b65-8605-db675faac363",
+                                        "state": "Ongoing",
+                                        "begin": 1732294281804,
+                                        "end": 1732294317873,
+                                        "duration": 36069
+                                    },
+                                    {
+                                        "id": "e7422afb-b252-424c-947a-1bb2f2850e91",
+                                        "state": "Idle",
+                                        "begin": 1732294211284,
+                                        "end": 1732294281804,
+                                        "duration": 70520
+                                    },
+                                    {
+                                        "id": "24a4e98f-4c68-47b7-88db-27b670051571",
+                                        "state": "Ongoing",
+                                        "begin": 1732294191921,
+                                        "end": 1732294211284,
+                                        "duration": 19363
+                                    },
+                                    {
+                                        "id": "92458c0a-3011-456b-b002-4ae322d763db",
+                                        "state": "Idle",
+                                        "begin": 1732294187378,
+                                        "end": 1732294191921,
+                                        "duration": 4543
+                                    },
+                                    {
+                                        "id": "667ccabb-86bb-437e-b8fd-006cf0a18b99",
+                                        "state": "Ongoing",
+                                        "begin": 1732293953690,
+                                        "end": 1732294187378,
+                                        "duration": 233688
+                                    },
+                                    {
+                                        "id": "9660fd8a-c732-42fa-992f-cfc41d88c17b",
+                                        "state": "Idle",
+                                        "begin": 1732293887377,
+                                        "end": 1732293953690,
+                                        "duration": 66313
+                                    },
+                                    {
+                                        "id": "af9b277e-f7ae-401a-9792-3e260a78788f",
+                                        "state": "Ongoing",
+                                        "begin": 1732293588732,
+                                        "end": 1732293887377,
+                                        "duration": 298645
+                                    },
+                                    {
+                                        "id": "d5a9ab84-6dbb-480c-b23a-96d324b472d7",
+                                        "state": "Idle",
+                                        "begin": 1732293587371,
+                                        "end": 1732293588732,
+                                        "duration": 1361
+                                    },
+                                    {
+                                        "id": "a2ff3f99-50f7-40f4-94e4-fd0168b6cc59",
+                                        "state": "Ongoing",
+                                        "begin": 1732293570783,
+                                        "end": 1732293587371,
+                                        "duration": 16588
+                                    },
+                                    {
+                                        "id": "16a3c01f-c100-49d7-8d69-4556f4722dcd",
+                                        "state": "Idle",
+                                        "begin": 1732293420717,
+                                        "end": 1732293570783,
+                                        "duration": 150066
+                                    },
+                                    {
+                                        "id": "b83629f6-fe8f-46c7-944c-43ba20071bf8",
+                                        "state": "Ongoing",
+                                        "begin": 1732293334216,
+                                        "end": 1732293420717,
+                                        "duration": 86501
+                                    },
+                                    {
+                                        "id": "aebd3bba-1acc-4365-b8a9-d35ead9b0a61",
+                                        "state": "Idle",
+                                        "begin": 1732293236425,
+                                        "end": 1732293334216,
+                                        "duration": 97791
+                                    },
+                                    {
+                                        "id": "8349e333-9481-4c0d-be1f-b800d69b0dcc",
+                                        "state": "Ongoing",
+                                        "begin": 1732293230073,
+                                        "end": 1732293236425,
+                                        "duration": 6352
+                                    },
+                                    {
+                                        "id": "8a05b808-4cb4-4911-ac3b-4e87e9e8a265",
+                                        "state": "Idle",
+                                        "begin": 1732293222919,
+                                        "end": 1732293230073,
+                                        "duration": 7154
+                                    },
+                                    {
+                                        "id": "6c408227-94c7-42b4-8f29-2ebdea30d695",
+                                        "state": "Ongoing",
+                                        "begin": 1732293176963,
+                                        "end": 1732293222919,
+                                        "duration": 45956
+                                    },
+                                    {
+                                        "id": "7c3fe73b-095e-4ddd-b00c-0a5e7debd01b",
+                                        "state": "Idle",
+                                        "begin": 1732293024287,
+                                        "end": 1732293176963,
+                                        "duration": 152676
+                                    },
+                                    {
+                                        "id": "99319a33-3e00-4ade-b916-d2f8508a61a1",
+                                        "state": "Ongoing",
+                                        "begin": 1732293022135,
+                                        "end": 1732293024287,
+                                        "duration": 2152
+                                    },
+                                    {
+                                        "id": "cb5355dd-af97-4c8f-89dd-070944a5b3c0",
+                                        "state": "Idle",
+                                        "begin": 1732293017669,
+                                        "end": 1732293022135,
+                                        "duration": 4466
+                                    },
+                                    {
+                                        "id": "3e9f101e-b0fe-4cdf-9db3-3bb8e42034bb",
+                                        "state": "Ongoing",
+                                        "begin": 1732293013382,
+                                        "end": 1732293017669,
+                                        "duration": 4287
+                                    },
+                                    {
+                                        "id": "9220dbc6-5e26-4560-a14c-99eb1ed88f44",
+                                        "state": "Idle",
+                                        "begin": 1732293001808,
+                                        "end": 1732293013382,
+                                        "duration": 11574
+                                    },
+                                    {
+                                        "id": "83d2ad02-6039-48a5-8a6b-9268b5489f5d",
+                                        "state": "Ongoing",
+                                        "begin": 1732292998447,
+                                        "end": 1732293001808,
+                                        "duration": 3361
+                                    },
+                                    {
+                                        "id": "29cd3b86-84c7-4427-ba9d-b40a314d32fa",
+                                        "state": "Idle",
+                                        "begin": 1732292975099,
+                                        "end": 1732292998447,
+                                        "duration": 23348
+                                    },
+                                    {
+                                        "id": "6ab961b3-e970-4594-88a0-e975ed645f85",
+                                        "state": "Ongoing",
+                                        "begin": 1732292916654,
+                                        "end": 1732292975099,
+                                        "duration": 58445
+                                    },
+                                    {
+                                        "id": "e0ee49e9-6133-4e74-ae46-8a52b7a2d465",
+                                        "state": "Idle",
+                                        "begin": 1732292913721,
+                                        "end": 1732292916654,
+                                        "duration": 2933
+                                    },
+                                    {
+                                        "id": "e3e1d14a-68f1-4e1f-bf3c-b52dd086c301",
+                                        "state": "Ongoing",
+                                        "begin": 1732292876631,
+                                        "end": 1732292913721,
+                                        "duration": 37090
+                                    },
+                                    {
+                                        "id": "7ef2673c-7dc9-4e42-9bc6-edd6ef36f652",
+                                        "state": "Idle",
+                                        "begin": 1732292870783,
+                                        "end": 1732292876631,
+                                        "duration": 5848
+                                    },
+                                    {
+                                        "id": "2f718253-b927-4603-936f-8e2fc78e5273",
+                                        "state": "Ongoing",
+                                        "begin": 1732292859550,
+                                        "end": 1732292870783,
+                                        "duration": 11233
+                                    },
+                                    {
+                                        "id": "2c6cff59-b685-454d-9e42-762ef736405e",
+                                        "state": "Idle",
+                                        "begin": 1732292832031,
+                                        "end": 1732292859550,
+                                        "duration": 27519
+                                    },
+                                    {
+                                        "id": "d4a8f882-7a0f-40fe-8539-cb0d326e67e1",
+                                        "state": "Ongoing",
+                                        "begin": 1732292688132,
+                                        "end": 1732292832031,
+                                        "duration": 143899
+                                    },
+                                    {
+                                        "id": "58ac804d-bdb8-447c-a07f-d59c504d91ac",
+                                        "state": "Idle",
+                                        "begin": 1732292687351,
+                                        "end": 1732292688132,
+                                        "duration": 781
+                                    },
+                                    {
+                                        "id": "703a152e-ce69-421d-a104-480c4ebaa3a8",
+                                        "state": "Ongoing",
+                                        "begin": 1732292684953,
+                                        "end": 1732292687351,
+                                        "duration": 2398
+                                    },
+                                    {
+                                        "id": "04e807a7-72e8-4255-9cbf-6ae95e8c140f",
+                                        "state": "Idle",
+                                        "begin": 1732292666184,
+                                        "end": 1732292684953,
+                                        "duration": 18769
+                                    },
+                                    {
+                                        "id": "9a102e3c-0e4c-4e6d-8993-a87b2a5ff81e",
+                                        "state": "Ongoing",
+                                        "begin": 1732292584887,
+                                        "end": 1732292666184,
+                                        "duration": 81297
+                                    },
+                                    {
+                                        "id": "ca2692f1-e676-4ad0-bf23-5eac284b667f",
+                                        "state": "Idle",
+                                        "begin": 1732292439164,
+                                        "end": 1732292584887,
+                                        "duration": 145723
+                                    },
+                                    {
+                                        "id": "994fc9da-b447-4017-994f-09fd946cb60a",
+                                        "state": "Ongoing",
+                                        "begin": 1732292436080,
+                                        "end": 1732292439164,
+                                        "duration": 3084
+                                    },
+                                    {
+                                        "id": "a4ab5244-74cb-4a24-b3ae-3720ee13c4ec",
+                                        "state": "Idle",
+                                        "begin": 1732292421060,
+                                        "end": 1732292436080,
+                                        "duration": 15020
+                                    },
+                                    {
+                                        "id": "35a2fe6a-54d9-4f59-8b7b-cb180137d7b4",
+                                        "state": "Ongoing",
+                                        "begin": 1732292409416,
+                                        "end": 1732292421060,
+                                        "duration": 11644
+                                    },
+                                    {
+                                        "id": "f516fefa-91ce-4ed3-8509-106c567abd57",
+                                        "state": "Idle",
+                                        "begin": 1732292396579,
+                                        "end": 1732292409416,
+                                        "duration": 12837
+                                    },
+                                    {
+                                        "id": "d270811f-54c7-4380-8afb-8c800ac47d61",
+                                        "state": "Ongoing",
+                                        "begin": 1732292387526,
+                                        "end": 1732292396579,
+                                        "duration": 9053
+                                    },
+                                    {
+                                        "id": "ccb04929-24db-4032-b00a-d615bc0e7413",
+                                        "state": "Idle",
+                                        "begin": 1732292387351,
+                                        "end": 1732292387526,
+                                        "duration": 175
+                                    },
+                                    {
+                                        "id": "3ec031cf-0471-4161-99b3-7e33d1d1edf7",
+                                        "state": "Ongoing",
+                                        "begin": 1732292382926,
+                                        "end": 1732292387351,
+                                        "duration": 4425
+                                    },
+                                    {
+                                        "id": "7f1a709f-2ca2-4881-8259-fb29d8e48dbc",
+                                        "state": "Idle",
+                                        "begin": 1732292342519,
+                                        "end": 1732292382926,
+                                        "duration": 40407
+                                    },
+                                    {
+                                        "id": "b2b3d659-fd0c-4375-ab67-40f28159e651",
+                                        "state": "Ongoing",
+                                        "begin": 1732292177516,
+                                        "end": 1732292342519,
+                                        "duration": 165003
+                                    },
+                                    {
+                                        "id": "0194f87e-9988-4b23-a999-0fac6e793c75",
+                                        "state": "Idle",
+                                        "begin": 1732292087337,
+                                        "end": 1732292177516,
+                                        "duration": 90179
+                                    },
+                                    {
+                                        "id": "0d7de3b3-1999-4b16-baca-c519d1b4c208",
+                                        "state": "Ongoing",
+                                        "begin": 1732291787426,
+                                        "end": 1732292087337,
+                                        "duration": 299911
+                                    },
+                                    {
+                                        "id": "fc808a2c-52aa-4ef6-9c37-7ba42dd1e3d7",
+                                        "state": "Idle",
+                                        "begin": 1732291787326,
+                                        "end": 1732291787426,
+                                        "duration": 100
+                                    },
+                                    {
+                                        "id": "7e2e799d-2a6a-42c8-8f80-9ca4136e84d2",
+                                        "state": "Ongoing",
+                                        "begin": 1732291493121,
+                                        "end": 1732291787326,
+                                        "duration": 294205
+                                    },
+                                    {
+                                        "id": "243e7fa3-afe2-40b6-9f26-d7c59c49da9d",
+                                        "state": "Idle",
+                                        "begin": 1732291487316,
+                                        "end": 1732291493120,
+                                        "duration": 5804
+                                    },
+                                    {
+                                        "id": "a577c67f-d4a6-4c9d-a4a9-0d371d78acba",
+                                        "state": "Ongoing",
+                                        "begin": 1732291474125,
+                                        "end": 1732291487316,
+                                        "duration": 13191
+                                    },
+                                    {
+                                        "id": "2eba8f68-5ba5-40ac-beac-fa8622f6ccac",
+                                        "state": "Idle",
+                                        "begin": 1732291400654,
+                                        "end": 1732291474125,
+                                        "duration": 73471
+                                    },
+                                    {
+                                        "id": "71266147-861d-46e1-ac3d-f2d2379595b6",
+                                        "state": "Ongoing",
+                                        "begin": 1732291193249,
+                                        "end": 1732291400654,
+                                        "duration": 207405
+                                    },
+                                    {
+                                        "id": "e127b345-be76-4276-86de-7d3bfafef6a4",
+                                        "state": "Idle",
+                                        "begin": 1732291159890,
+                                        "end": 1732291193249,
+                                        "duration": 33359
+                                    },
+                                    {
+                                        "id": "845de9e3-6c11-459b-abc8-ce586824adfe",
+                                        "state": "Ongoing",
+                                        "begin": 1732291108199,
+                                        "end": 1732291159890,
+                                        "duration": 51691
+                                    },
+                                    {
+                                        "id": "27588406-2c4d-41d9-bceb-e651a7826ffb",
+                                        "state": "Idle",
+                                        "begin": 1732290927582,
+                                        "end": 1732291108199,
+                                        "duration": 180617
+                                    },
+                                    {
+                                        "id": "9fca9bae-2256-45f2-953f-9eaf7ff7f696",
+                                        "state": "Ongoing",
+                                        "begin": 1732290895736,
+                                        "end": 1732290927582,
+                                        "duration": 31846
+                                    },
+                                    {
+                                        "id": "cf84bb5b-baed-490d-af52-86b5b257d955",
+                                        "state": "Idle",
+                                        "begin": 1732290892048,
+                                        "end": 1732290895736,
+                                        "duration": 3688
+                                    },
+                                    {
+                                        "id": "2b2e277b-4dff-4189-8efc-fdef0f352837",
+                                        "state": "Ongoing",
+                                        "begin": 1732290888331,
+                                        "end": 1732290892048,
+                                        "duration": 3717
+                                    },
+                                    {
+                                        "id": "2a69555e-5372-4b16-87ff-7ba036900090",
+                                        "state": "Idle",
+                                        "begin": 1732290887301,
+                                        "end": 1732290888331,
+                                        "duration": 1030
+                                    },
+                                    {
+                                        "id": "8a0692fb-5dad-4e4a-b10a-002d6ce421df",
+                                        "state": "Ongoing",
+                                        "begin": 1732290873775,
+                                        "end": 1732290887301,
+                                        "duration": 13526
+                                    },
+                                    {
+                                        "id": "cbae9a42-fe4c-4adb-8fe5-4b76c482f111",
+                                        "state": "Idle",
+                                        "begin": 1732290683600,
+                                        "end": 1732290873775,
+                                        "duration": 190175
+                                    },
+                                    {
+                                        "id": "a326f7db-ebb5-42c2-a508-992a920bad3d",
+                                        "state": "Ongoing",
+                                        "begin": 1732290646977,
+                                        "end": 1732290683600,
+                                        "duration": 36623
+                                    },
+                                    {
+                                        "id": "309e6e40-d6ef-4497-98cc-ad5ee274729c",
+                                        "state": "Idle",
+                                        "begin": 1732290632410,
+                                        "end": 1732290646977,
+                                        "duration": 14567
+                                    },
+                                    {
+                                        "id": "da86d38c-f2f3-412f-8acb-1bfdc0ae1c78",
+                                        "state": "Ongoing",
+                                        "begin": 1732290605109,
+                                        "end": 1732290632410,
+                                        "duration": 27301
+                                    },
+                                    {
+                                        "id": "002488b7-e803-472e-bc41-fce851c837b2",
+                                        "state": "Idle",
+                                        "begin": 1732290597374,
+                                        "end": 1732290605109,
+                                        "duration": 7735
+                                    },
+                                    {
+                                        "id": "b6120540-aae5-4c53-a0e3-f69f4af00494",
+                                        "state": "Ongoing",
+                                        "begin": 1732290588204,
+                                        "end": 1732290597374,
+                                        "duration": 9170
+                                    },
+                                    {
+                                        "id": "d49e4ae0-b7f5-4fc8-a965-d2156b1f4b2f",
+                                        "state": "Idle",
+                                        "begin": 1732290587299,
+                                        "end": 1732290588204,
+                                        "duration": 905
+                                    },
+                                    {
+                                        "id": "327ef65d-df69-4164-9ff7-916ef606646d",
+                                        "state": "Ongoing",
+                                        "begin": 1732290568577,
+                                        "end": 1732290587299,
+                                        "duration": 18722
+                                    },
+                                    {
+                                        "id": "7af6f8a8-aed2-454d-afa9-6f84f3d3a635",
+                                        "state": "Idle",
+                                        "begin": 1732290535276,
+                                        "end": 1732290568577,
+                                        "duration": 33301
+                                    },
+                                    {
+                                        "id": "398e297a-85a9-45c0-a1f9-22a7f9597777",
+                                        "state": "Ongoing",
+                                        "begin": 1732290530372,
+                                        "end": 1732290535276,
+                                        "duration": 4904
+                                    },
+                                    {
+                                        "id": "42059f75-0e8a-4c44-8b9d-0f47c88e92de",
+                                        "state": "Idle",
+                                        "begin": 1732290398432,
+                                        "end": 1732290530372,
+                                        "duration": 131940
+                                    },
+                                    {
+                                        "id": "878d654c-374f-447b-8461-955068b22b5b",
+                                        "state": "Ongoing",
+                                        "begin": 1732290393076,
+                                        "end": 1732290398432,
+                                        "duration": 5356
+                                    },
+                                    {
+                                        "id": "fd590987-012d-4a03-9a2c-dcbe2a7ea5d3",
+                                        "state": "Idle",
+                                        "begin": 1732290385195,
+                                        "end": 1732290393076,
+                                        "duration": 7881
+                                    },
+                                    {
+                                        "id": "8df2809d-c3c7-4c3f-982c-ec7b1fd90036",
+                                        "state": "Ongoing",
+                                        "begin": 1732290383264,
+                                        "end": 1732290385195,
+                                        "duration": 1931
+                                    },
+                                    {
+                                        "id": "283a003c-2b75-4005-86cf-4fd04e7d9562",
+                                        "state": "Idle",
+                                        "begin": 1732290287298,
+                                        "end": 1732290383264,
+                                        "duration": 95966
+                                    },
+                                    {
+                                        "id": "e5e291e4-21c5-4eb4-a8c6-cc285b8ff0d5",
+                                        "state": "Ongoing",
+                                        "begin": 1732290280455,
+                                        "end": 1732290287298,
+                                        "duration": 6843
+                                    },
+                                    {
+                                        "id": "2ef78c60-6522-49f7-a50a-fd1c9430091b",
+                                        "state": "Idle",
+                                        "begin": 1732290255962,
+                                        "end": 1732290280455,
+                                        "duration": 24493
+                                    },
+                                    {
+                                        "id": "6d3c8393-e031-4cfc-b5f7-5095dd032fa8",
+                                        "state": "Ongoing",
+                                        "begin": 1732290236154,
+                                        "end": 1732290255962,
+                                        "duration": 19808
+                                    },
+                                    {
+                                        "id": "4ab0222a-f0d5-4a9d-91aa-4f74d793a4b1",
+                                        "state": "Idle",
+                                        "begin": 1732290123095,
+                                        "end": 1732290236154,
+                                        "duration": 113059
+                                    },
+                                    {
+                                        "id": "8810b8c4-cea7-442c-87a7-33a232b530d1",
+                                        "state": "Ongoing",
+                                        "begin": 1732290025019,
+                                        "end": 1732290123095,
+                                        "duration": 98076
+                                    }
+                                ]
+                            },
+                            "actionType": "Codding"
+                        },
+                        {
+                            "sessionInfo": {
+                                "id": "9379bdfd-0ada-4c2a-b040-307ead352f69",
+                                "duration": 0,
+                                "idle": 0,
+                                "state": "Idle",
+                                "durations": []
+                            },
+                            "actionType": "Stop"
+                        }
+                    ]
                 }
             ]
         }
