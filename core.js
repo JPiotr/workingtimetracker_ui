@@ -1,6 +1,6 @@
 const ctxSummary = document.querySelector("#summaryCanvas");
 const ctxMain = document.querySelector("#mainCanvas");
-const calendar = document.querySelector(".calendar");
+const calendar = document.querySelector(".timeline");
 
 class Scale {
   divider = 1;
@@ -804,8 +804,8 @@ class ChartsOptionsUI {
       child.manager = manager;
       this.children.push(child);
     });
-    this.children[0].domElement.classList.add("checked");
-    this.children[0].active = true;
+    this.children[2].domElement.classList.add("checked");
+    this.children[2].active = true;
   }
   getActive() {
     return this.children.find((child) => child.active).name;
