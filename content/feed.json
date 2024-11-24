@@ -2,55 +2,11 @@
   "feeds": [
     {
       "title": "New Relase out now!",
-      "date": "03.11.2024",
+      "date": "24.11.2024",
       "content": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sem lacus, tempus a dolor ac, lacinia sagittis lorem. Aliquam tempor urna eget dolor convallis, eget scelerisque lectus faucibus. Sed ornare mi sed odio pharetra, id porttitor est pellentesque. Phasellus finibus, metus nec ultricies ullamcorper, dolor.",
+        "content": "New release is here for You! I prepared visualization tool. Have fun!",
         "link": {
           "text": "Relase 1.2.0!",
-          "link": "https://google.com"
-        }
-      }
-    },
-    {
-      "title": "New roadmap is here!",
-      "date": "01.11.2024",
-      "content": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacinia lacus, cursus interdum urna. Aliquam eros leo, porta at viverra et, viverra eget magna. Praesent elementum pharetra nulla, eleifend aliquam orci pharetra id. Proin consequat molestie ipsum, egestas scelerisque ex semper vel. Nulla gravida ultricies nunc vel interdum. Cras.",
-        "link": {
-          "text": "Roadmap!",
-          "link": "https://google.com"
-        }
-      }
-    },
-    {
-      "title": "New roadmap is here!",
-      "date": "01.11.2024",
-      "content": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacinia lacus, cursus interdum urna. Aliquam eros leo, porta at viverra et, viverra eget magna. Praesent elementum pharetra nulla, eleifend aliquam orci pharetra id. Proin consequat molestie ipsum, egestas scelerisque ex semper vel. Nulla gravida ultricies nunc vel interdum. Cras.",
-        "link": {
-          "text": "Roadmap!",
-          "link": "https://google.com"
-        }
-      }
-    },
-    {
-      "title": "New roadmap is here!",
-      "date": "01.11.2024",
-      "content": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacinia lacus, cursus interdum urna. Aliquam eros leo, porta at viverra et, viverra eget magna. Praesent elementum pharetra nulla, eleifend aliquam orci pharetra id. Proin consequat molestie ipsum, egestas scelerisque ex semper vel. Nulla gravida ultricies nunc vel interdum. Cras.",
-        "link": {
-          "text": "Roadmap!",
-          "link": "https://google.com"
-        }
-      }
-    },
-    {
-      "title": "New roadmap is here!",
-      "date": "01.11.2024",
-      "content": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacinia lacus, cursus interdum urna. Aliquam eros leo, porta at viverra et, viverra eget magna. Praesent elementum pharetra nulla, eleifend aliquam orci pharetra id. Proin consequat molestie ipsum, egestas scelerisque ex semper vel. Nulla gravida ultricies nunc vel interdum. Cras.",
-        "link": {
-          "text": "Roadmap!",
           "link": "https://google.com"
         }
       }
