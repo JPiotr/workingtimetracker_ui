@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Working Time Tracker UI</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Scope+One&display=swap" rel="stylesheet">
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bar_chart,loyalty,show_chart"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=bar_chart,show_chart"
     />
     <link rel="stylesheet" href="/css/dark.css" />
     <link rel="stylesheet" href="/css/light.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="dark">
-    <div class="fileInput hide">
+    <div class="fileInput">
       <div>
         <div id="fileMessage">
           <h2>
@@ -50,7 +52,6 @@
         <div class="usersArea"></div>
       </div>
       <div class="diagrams">
-        <div class="calendar hide"></div>
         <canvas class="" id="mainCanvas"></canvas>
       </div>
       <div class="summary">

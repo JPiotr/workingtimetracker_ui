@@ -5,11 +5,13 @@
 /* @import url("/css/dark-mc.css"); */
 /* @import url("/css/light-mc.css"); */
 
+*{
+  font-family: "Scope One";
+}
 div {
   /* outline: solid turquoise; */
   border-radius: 10px;
 }
-
 .hide{
   display: none !important;
 }
@@ -35,7 +37,6 @@ div {
     "users diagrams diagrams diagrams feed"
     "users contributors contributors contributors feed";
 }
-
 body.dark {
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
@@ -52,7 +53,6 @@ body.dark {
   grid-auto-flow: row;
   
 }
-
 .header {
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
@@ -62,7 +62,6 @@ body.dark {
   grid-template-areas: "ext-info options options options options";
   grid-area: header;
 }
-
 .ext-info {
   display: flex;
   flex-direction: row;
@@ -72,9 +71,8 @@ body.dark {
   background-color: var(--md-sys-color-surface-container);
 }
 .ext-info > img {
-  height: 4dvh;
+  height: 8dvh;
 }
-
 .options {
   background-color: var(--md-sys-color-surface-container);
   padding: 1em;
@@ -82,13 +80,8 @@ body.dark {
   grid-auto-columns: 1fr;
   gap: 0px 1.5em;
   grid-auto-flow: column;
-  justify-content: space-around;
-  align-content: stretch;
-  justify-self: stretch;
-  align-self: stretch;
   grid-area: options;
 }
-
 .users {
   background-color: var(--md-sys-color-surface-container);
   display: grid;
@@ -101,7 +94,6 @@ body.dark {
     "usersArea";
   grid-area: users;
 }
-
 .userSearchArea {
   background-color: var(--md-sys-color-surface-container);
   grid-area: userSearchArea;
@@ -132,7 +124,6 @@ body.dark {
 .userSearchArea > input[type="search"]:focus-visible {
   outline: none;
 }
-
 .usersArea {
   background-color: var(--md-sys-color-surface-container);
   padding: 0.5em 1em;
@@ -146,7 +137,6 @@ body.dark {
   grid-area: usersArea;
   animation: noBorder 100ms 1;
 }
-
 .usersArea > div {
   transition: background-color, color 500ms;
   cursor: pointer;
@@ -175,7 +165,6 @@ body.dark {
   color: var(--md-sys-color-primary);
   border-bottom: solid var(--md-sys-color-primary);
 }
-
 .usersArea > div > span {
   font-weight: 100;
   letter-spacing: 1pt;
@@ -195,15 +184,14 @@ body.dark {
   height: 100%;
   border-radius: 10px;
 }
-
 .diagrams {
+  padding: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--md-sys-color-surface-container);
   grid-area: diagrams;
 }
-
 .summary {
   display: flex;
   flex-direction: column;
@@ -217,7 +205,6 @@ body.dark {
   justify-self: center;
   padding: inherit;
 }
-
 .contributors {
   background-color: var(--md-sys-color-surface-container);
   grid-area: contributors;
@@ -241,7 +228,6 @@ body.dark {
   color: var(--md-sys-color-tertiary);
   align-self: center;
 }
-
 .feed {
   display: grid;
   gap: 1em 0px;
@@ -254,14 +240,12 @@ body.dark {
   color: inherit;
   height: 5.5dvh;
 }
-
 .feed:hover .feed-element:nth-child(1):not(:hover) > .feed-info > h3{
   color: var(--md-sys-color-primary);
 }
 .feed:hover .feed-element:nth-child(1):not(:hover) > .feed-info > h5{
   color: var(--md-sys-color-primary);
 }
-
 .feed-element:nth-child(1) {
   height: 25dvh;
   background-color: var(--md-sys-color-secondary);
@@ -291,6 +275,7 @@ body.dark {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  flex-grow: 1;
 }
 .feed-info > h3 {
   font-weight: bolder;
@@ -322,8 +307,8 @@ body.dark {
   flex-direction: column;
   justify-content: space-between;
   text-align: justify;
+  flex-grow: 3;
 }
-
 .feed-content > a {
   font-weight: bold;
   padding: 0.5em 0em;
@@ -336,7 +321,6 @@ body.dark {
   background-color: var(--md-sys-color-secondary);
   color: var(--md-sys-color-on-secondary);
 }
-
 .fileInput{
   z-index: 200;
   padding: 0;
@@ -424,7 +408,6 @@ body.dark {
   color: var(--md-sys-color-on-secondary);
   border-color: var(--md-sys-color-on-secondary);
 }
-
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -434,11 +417,12 @@ body.dark {
 }
 .chartOption{
   cursor: pointer;
-  min-width: 6dvw;
+  min-width: 10dvw;
   max-width: 12dvw;
   border-bottom: solid;
   background-color: var(--md-sys-color-surface-container);
   display: flex;
+  justify-self: center;
   justify-content: space-around;
   align-items: center;
 }
@@ -457,9 +441,4 @@ body.dark {
   letter-spacing: 2pt;
   font-size: large;
   font-weight: bold;
-}
-.timeline{
-  width: 100%;
-  height: 100%;
-  padding: 2em;
 }

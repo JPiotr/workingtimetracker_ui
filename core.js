@@ -1,6 +1,5 @@
 const ctxSummary = document.querySelector("#summaryCanvas");
 const ctxMain = document.querySelector("#mainCanvas");
-const calendar = document.querySelector(".timeline");
 
 class Scale {
   divider = 1;
@@ -214,9 +213,13 @@ class BarChart extends ChartUI {
             dataSets.push({
               label: user.user,
               data: data,
-              backgroundColor: [color],
+              backgroundColor: [
+                `rgba(${ColorMixer.hexToRgb(color).r},
+              ${ColorMixer.hexToRgb(color).g},
+              ${ColorMixer.hexToRgb(color).b},0.3)`,
+              ],
               borderColor: [color],
-              borderWidth: 1,
+              borderWidth: 2,
             });
           }
         } else {
@@ -251,9 +254,13 @@ class BarChart extends ChartUI {
           dataSets.push({
             label: user.user,
             data: data,
-            backgroundColor: [color],
+            backgroundColor: [
+              `rgba(${ColorMixer.hexToRgb(color).r},
+              ${ColorMixer.hexToRgb(color).g},
+              ${ColorMixer.hexToRgb(color).b},0.3)`,
+            ],
             borderColor: [color],
-            borderWidth: 1,
+            borderWidth: 2,
           });
         }
       });
@@ -363,11 +370,19 @@ class LineChart extends ChartUI {
       let idleData = [];
       const idleIndex = actions.findIndex((l) => l == "Idle");
       let wasIdleAction = false;
+      let mixColors = false;
       actions.forEach((action) => {
         let data = [];
+        let color;
         fileData.data.forEach((user) => {
           if (names.length != 0) {
             if (names.includes(user.user)) {
+              if (names.length == 1) {
+                mixColors = true;
+                color = DataLoader.users.find(
+                  (usr) => usr.userName == user.user
+                ).color;
+              }
               user.dailySessions.forEach((daily) => {
                 let idle = 0;
                 let act = 0;
@@ -456,11 +471,31 @@ class LineChart extends ChartUI {
         data.forEach((d) => {
           d.x = new Date(Date.parse(d.x)).toLocaleDateString();
         });
-        dataSets.push({
-          label: action,
-          fill: false,
-          data: data,
-        });
+        if (mixColors) {
+          dataSets.push({
+            label: action,
+            fill: false,
+            data: data,
+            backgroundColor: 
+              ColorMixer.mixHexColors(color, this._getActionColor(action),0.5),
+            
+            borderColor: 
+              ColorMixer.mixHexColors(color, this._getActionColor(action)),
+            
+          });
+        }else{
+          dataSets.push({
+            label: action,
+            fill: false,
+            data: data,
+            backgroundColor: [
+              `rgba(${ColorMixer.hexToRgb(this._getActionColor(action)).r},
+              ${ColorMixer.hexToRgb(this._getActionColor(action)).g},
+              ${ColorMixer.hexToRgb(this._getActionColor(action)).b},0.5)`,
+            ],
+            borderColor: [this._getActionColor(action)],
+          });
+        }
       });
 
       let largesScale = new Scale(1, "Temp");
@@ -478,6 +513,22 @@ class LineChart extends ChartUI {
       });
       resolve([labels, dataSets, largesScale]);
     });
+  }
+  _getActionColor(action) {
+    switch (action) {
+      case "Idle":
+        return "#4dc9f6";
+      case "Codding":
+        return "#f67019";
+      case "Debugging":
+        return "#f53794";
+      case "Documenting":
+        return "#acc236";
+      case "Testing":
+        return "#8549ba";
+      case "Building":
+        return "#00a950";
+    }
   }
   _mergeAndSortData(data = []) {
     const tempMap = new Map();
@@ -533,25 +584,108 @@ class LineChart extends ChartUI {
     });
   }
 }
-class CalendarChart extends ChartUI {
+//unused
+class TimelineChart extends ChartUI {
   constructor(manager, name) {
     super(name, manager);
   }
-  calend;
-  calculate(fileData = Core.extSavedData, names) {
-    let events = [];
-    return new Promise((resolve) => {
-
-      resolve(events);
+  _mergeAndSortData(data = []) {
+    const tempMap = new Map();
+    data.forEach((value) => {
+      if (tempMap.has(value.x)) {
+        tempMap.get(value.x).y += value.y;
+      } else {
+        tempMap.set(value.x, { ...value });
+      }
+    });
+    let merged = Array.from(tempMap.values());
+    return merged.sort((a, b) => {
+      return Date.parse(a.x) - Date.parse(b.x);
     });
   }
-  update(data) {
-    
+  calculate(fileData = Core.extSavedData, names) {
+    return new Promise((resolve) => {
+      let events = [];
+      let labels = [];
+      let datasets = [];
+      fileData.extConfig.enums
+        .find((x) => x.name == "ActionType")
+        .values.slice(0, 4)
+        .forEach((action) => {
+          datasets.push({
+            label: action,
+            data: [],
+            stepped: true,
+          });
+        });
+      fileData.data.forEach((user) => {
+        user.dailySessions.forEach((daily) => {
+          daily.sessions.forEach((session) => {
+            session.sessionInfo.durations.forEach((duration) => {
+              labels.push(new Date(duration.begin));
+              labels.push(new Date(duration.end));
+              datasets.forEach((d) => {
+                if (d.label == session.actionType) {
+                  d.data.push({
+                    x: new Date(duration.begin),
+                    y: duration.state,
+                  });
+                  d.data.push({
+                    x: new Date(duration.end),
+                    y: duration.state,
+                  });
+                } else {
+                  d.data.push({
+                    x: new Date(duration.begin),
+                    y: null,
+                  });
+                  d.data.push({
+                    x: new Date(duration.end),
+                    y: null,
+                  });
+                }
+              });
+            });
+          });
+        });
+      });
+      datasets = datasets.filter((x) => !x.data.every((d) => d.y == null));
+      datasets.forEach((d) => (d.data = this._mergeAndSortData(d.data)));
+      labels.sort((a, b) => {
+        return a - b;
+      });
+      labels = labels.map((x) => x.toLocaleString());
+      resolve({
+        labels: labels,
+        datasets: datasets,
+      });
+    });
   }
+  update(data) {}
   load(ctx, data) {
-    ctx.classList.add("hide");
-    calendar.classList.remove("hide");
-    
+    data.then((value) => {
+      this.chart = new Chart(ctx, {
+        type: "line",
+        data: value,
+        options: {
+          scales: {
+            y: {
+              type: "category",
+              labels: ["Ongoing", "Idle"],
+              offset: true,
+            },
+          },
+          plugins: {
+            legend: {
+              title: {
+                display: true,
+                text: "(all users)",
+              },
+            },
+          },
+        },
+      });
+    });
   }
 }
 class ChartsManager {
@@ -573,11 +707,11 @@ class ChartsManager {
         icon: "show_chart",
         chart: new LineChart("Line Chart", this),
       },
-      {
-        name: "Calendar",
-        icon: "loyalty",
-        chart: new CalendarChart("Calendar", this),
-      },
+      // {
+      //   name: "Calendar",
+      //   icon: "loyalty",
+      //   chart: new TimelineChart("Calendar", this),
+      // },
     ];
     this.chartOptionsUI = new ChartsOptionsUI(
       this.avaliableChartsOptions,
@@ -617,13 +751,7 @@ class ChartsManager {
     );
   }
   reactOnStateChange() {
-    if (!calendar.classList.contains("hide")) {
-      calendar.classList.add("hide");
-    }
-    if (this.activeChart.name == "Calendar") {
-    } else {
-      this.activeChart.chart.chart.destroy();
-    }
+    this.activeChart.chart.chart.destroy();
     this.activeChart = this.getActiveChart();
     ctxMain.classList.remove("hide");
     this.activeChart.chart.load(
@@ -804,8 +932,8 @@ class ChartsOptionsUI {
       child.manager = manager;
       this.children.push(child);
     });
-    this.children[2].domElement.classList.add("checked");
-    this.children[2].active = true;
+    this.children[0].domElement.classList.add("checked");
+    this.children[0].active = true;
   }
   getActive() {
     return this.children.find((child) => child.active).name;
@@ -896,7 +1024,38 @@ class FileLoader {
     });
   }
 }
+class ColorMixer {
+  static hexToRgb(hex) {
+    hex = hex.replace("#",'');
+    return {
+      r: parseInt(hex.slice(0, 2), 16),
+      g: parseInt(hex.slice(2, 4), 16),
+      b: parseInt(hex.slice(4, 6), 16),
+    };
+  }
 
+  static rgbToHex(color) {
+    return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
+  }
+
+  static mixColors(color1, color2) {
+    console.log("user",color1);
+    console.log("pallete",color2);
+    return {
+      r: (color1.r + color2.r) / 2,
+      g: (color1.g + color2.g) / 2,
+      b: (color1.b + color2.b) / 2,
+    };
+  }
+
+  static mixHexColors(color1Hex, color2Hex, opacity = 1) {
+    const color = ColorMixer.mixColors(
+      ColorMixer.hexToRgb(color1Hex),
+      ColorMixer.hexToRgb(color2Hex),
+    );
+    return `rgba(${color.r},${color.g},${color.b},${opacity})`
+  }
+}
 class Core {
   static version = "1.0.0.0";
   static extSavedData = {
@@ -935,7 +1094,15 @@ class Core {
                   duration: 1500,
                   idle: 750,
                   state: "Ongoing",
-                  durations: [],
+                  durations: [
+                    {
+                      id: "eb3ccf16-f7f4-4041-be18-616402a61756",
+                      state: "Ongoing",
+                      begin: 1731864643966,
+                      end: 1731864648929,
+                      duration: 4963,
+                    },
+                  ],
                 },
                 actionType: "Documenting",
               },
@@ -991,6 +1158,9 @@ class Core {
   constructor() {}
 
   init() {
+    Chart.defaults.font.family = "Scope One";
+    Chart.defaults.color = "rgb(229,225,233)";
+    Chart.defaults.borderColor = "rgba(229,225,233,0.1)";
     Core.ChartsManager.init();
     Core.DataLoader.loadFeeds();
   }
@@ -1011,10 +1181,10 @@ class Core {
     );
   }
   loadDummyData() {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       const host = "http://localhost:3000";
       const routes = ["extConfig", "data"];
-      fetch(`${host}/${routes[0]}`,{method:"GET"})
+      fetch(`${host}/${routes[0]}`, { method: "GET" })
         .then((response) => {
           return response.json();
         })
@@ -1028,8 +1198,9 @@ class Core {
         .then((json) => {
           Core.extSavedData.data = json;
           resolve(true);
-        }).catch((err)=>{
-          reject("JSON Server is not running!")
+        })
+        .catch((err) => {
+          reject("JSON Server is not running!");
         });
     });
   }
@@ -1037,7 +1208,8 @@ class Core {
 
 const core = new Core();
 core.init();
-core.symulate();
-//todo resignate of Fullcalendar and create my own approch 
+// core.symulate();
 
-//todo add mixing colors for line chart
+//todo: loading files again 
+//todo: loading files from localhost
+
