@@ -1210,6 +1210,8 @@ const core = new Core();
 core.init();
 // core.symulate();
 
+//todo: switch on barchart that will change calculation algorithm 
+
 //todo: loading files again 
 //todo: loading files from localhost
 
