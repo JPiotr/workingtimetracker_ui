@@ -70,7 +70,7 @@ body.dark {
   grid-area: ext-info;
   background-color: var(--md-sys-color-surface-container);
 }
-.ext-info > img {
+.ext-info > a > img {
   height: 8dvh;
 }
 .options {

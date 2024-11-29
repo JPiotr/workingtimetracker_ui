@@ -2,12 +2,12 @@
   "feeds": [
     {
       "title": "New Relase out now!",
-      "date": "24.11.2024",
+      "date": "29.11.2024",
       "content": {
-        "content": "New release is here for You! I prepared visualization tool. Have fun!",
+        "content": "The new version is already released! Admittedly, there are few changes in the extension itself, but there is a visualization tool, which I am also eager to develop! <br/>I invite you to use it!",
         "link": {
           "text": "Relase 1.2.0!",
-          "link": "https://google.com"
+          "link": "https://marketplace.visualstudio.com/items?itemName=Oblitus.workingtimetracker"
         }
       }
     }
