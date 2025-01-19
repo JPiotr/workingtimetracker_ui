@@ -1,6 +1,17 @@
 {
   "feeds": [
     {
+      "title": "New visualization tool!",
+      "date": "19.01.2025",
+      "content": {
+        "content": "I've made CLI version of vizualization tool that I think will be usefull.",
+        "link": {
+          "text": "WTTCLI Visualizer",
+          "link": "https://github.com/JPiotr/WTTCLIVisualizer"
+        }
+      }
+    },
+    {
       "title": "New Relase out now!",
       "date": "29.11.2024",
       "content": {

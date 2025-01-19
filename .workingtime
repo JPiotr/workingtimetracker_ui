@@ -24,9 +24,7 @@
     },
     "data": [
         {
-            "config": {
-                "showIdle": true
-            },
+            "config": true,
             "user": "JPiotr",
             "dailySessions": [
                 {
@@ -7454,6 +7452,60 @@
                                 ]
                             },
                             "actionType": "Codding"
+                        }
+                    ]
+                },
+                {
+                    "date": "Sun Jan 19 2025",
+                    "sessions": [
+                        {
+                            "sessionInfo": {
+                                "id": "bee4bc42-fb45-4aed-9f6d-6a93e2554a87",
+                                "duration": 114927,
+                                "idle": 133242,
+                                "state": "Ongoing",
+                                "durations": [
+                                    {
+                                        "id": "9724c615-88ae-4821-a6ad-b538ad8589bc",
+                                        "state": "Ongoing",
+                                        "begin": 1737293928572,
+                                        "end": 1737293928572,
+                                        "duration": 0
+                                    },
+                                    {
+                                        "id": "36a93035-6332-46a1-9814-c4f6e8613999",
+                                        "state": "Idle",
+                                        "begin": 1737293920924,
+                                        "end": 1737293928572,
+                                        "duration": 7648
+                                    },
+                                    {
+                                        "id": "2cb8ce56-cfa5-4a6d-9cc2-280eb2df2c87",
+                                        "state": "Ongoing",
+                                        "begin": 1737293915712,
+                                        "end": 1737293920924,
+                                        "duration": 5212
+                                    },
+                                    {
+                                        "id": "13ea849e-67cb-4839-a038-728e5ddc4440",
+                                        "state": "Idle",
+                                        "begin": 1737293905045,
+                                        "end": 1737293915712,
+                                        "duration": 10667
+                                    },
+                                    {
+                                        "id": "56e2d823-dc1f-411b-9b82-65dadd32944e",
+                                        "state": "Ongoing",
+                                        "begin": 1737293806195,
+                                        "end": 1737293905045,
+                                        "duration": 98850
+                                    }
+                                ],
+                                "filesExt": [
+                                    ".json"
+                                ]
+                            },
+                            "actionType": "Documenting"
                         }
                     ]
                 }
